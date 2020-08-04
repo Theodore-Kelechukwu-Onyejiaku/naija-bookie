@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <%- include("./partials/header") -%>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <h1>Dynamic content</h1>
+    <% if(error){ %>
+      <p>Error getting dynamin content</p>
+    <% } else{ %>
+      <p>The library has the following record counts</p>
+      <ul>
+        <li><strong>Books: <%= data.book_count %></strong></li>
+        <li><strong>Copies: <%= data.book_instance_count %></strong></li>
+        <li><strong>Copies available: <%= data.book_instance_available_count %></strong></li>
+        <li><strong>Authors: <%= data.author_count %></strong></li>
+        <li><strong>Genres: <%= data.genre_count %></strong></li>
+      </ul>
+    <% } %>
   </body>
 </html>
