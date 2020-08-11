@@ -1,0 +1,17 @@
+<%- include("./partials/header") -%>
+    <h1><%= title %></h1>
+    <ul class="list-group">
+    <% book_list.sort((a,b)=>{let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;})%>
+    <% book_list.forEach(book =>{ %>
+        <% if(book){ %>
+            <li class="list-group-item">
+                <a href="<%= book.url %>"><%= book.title %></a>(<%= book.author.first_name%>, <%= book.author.family_name %>)
+            </li>
+        <% }else{%>
+            <div>There are no books</div>
+        <% } %>
+    <% }) %>
+    </ul>
+<%- include("./partials/footer") -%>
+
+

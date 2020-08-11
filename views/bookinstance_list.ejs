@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+<h1><%=title %></h1>
+<ul class="list-group">
+
+    <% bookinstance_list.forEach(val=>{ %>
+        <li class="list-group-item">
+            <a href="<%= val.url %>"><%= val.book.title %></a>: <%= val.book.imprint %> - 
+                <% if(val.status === "Available"){ %>
+                    <span class="text-success"><%= val.status %></span>
+                <% } else if(val.status === "Maintenance"){ %>
+                    <span class="text-danger"><%= val.status %></span>
+                <% } else{ %>
+                    <span><%= val.status %></span>
+                <% } %>
+        </li>
+    <% })%>
+</ul>
+
+<%- include("partials/footer") %>
