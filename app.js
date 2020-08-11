@@ -12,7 +12,7 @@ var catalogRouter = require("./routes/catalog");
 
 var app = express();
 var mongoose = require("mongoose");
-var mongoDB =  process.env.DB_LOCAL || process.env.DB_ONLINE ;
+var mongoDB = process.env.DB_ONLINE ;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connections;
 db.concat("error", console.error.bind(console, "MongoDB connection error."));
