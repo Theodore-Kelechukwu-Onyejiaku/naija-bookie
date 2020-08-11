@@ -4,13 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config()
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require("./routes/catalog");
 
 var app = express();
 var mongoose = require("mongoose");
-var mongoDB = "mongodb://localhost:27017/locallibrary";
+var mongoDB =  process.env.DB_LOCAL || process.env.DB_ONLINE ;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connections;
 db.concat("error", console.error.bind(console, "MongoDB connection error."));
