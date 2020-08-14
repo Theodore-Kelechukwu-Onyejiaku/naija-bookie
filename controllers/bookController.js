@@ -33,7 +33,7 @@ exports.index = function(req, res) {
 
 // Display list of all books.
 exports.book_list = function(req, res, next) {
-    Book.find({}, "title author")   //Finds all books and return only title and author. It will also return _id and virtual fields
+    Book.find({}, "title author")   //Finds all books and return only title and author fields. It will also return _id and virtual fields
     .populate("author") //This will display all the author field details instead of the author id, since it references another document
     .exec((err, list_books)=>{
         
