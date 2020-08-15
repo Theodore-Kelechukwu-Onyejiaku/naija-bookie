@@ -10,7 +10,6 @@ exports.index = function(req, res) {
     //The async_parallel allows you to run multiple queries. It accepts two parameters, the object(where you have the functions and the callback to take the results)
     async.parallel({
         book_count: function(callback) {
-            
             //Note the callback here is to handle any error encountered and should be used normally 
             Book.countDocuments({}, callback); // Pass an empty object as match condition to find all documents of this collection
         },

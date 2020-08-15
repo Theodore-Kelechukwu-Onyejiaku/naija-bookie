@@ -1,0 +1,16 @@
+<%- include("partials/header") %>
+
+<% if(genre_list.length > 0){ %>
+    <ul class="list-group">
+        <% genre_list.sort((a,b)=>{let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;}) %>
+        <% genre_list.forEach(genre =>{ %>
+            <li class="list-group-item">
+                <a href="<%= genre.url %>"><%= genre.name %></a>
+            </li>
+        <% }) %>
+    </ul>
+<% }else{ %>
+    <p>No genre found!</p>
+<% } %>
+
+<%- include("partials/footer") %>

@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+const moment = require("moment");
 
 
 var AuthorSchema = new mongoose.Schema({
@@ -14,10 +15,10 @@ AuthorSchema.virtual("name").get(function(){
 //we want to make sure we handle the exception by returning an empty string for that case
     var fullname = "";
     if(this.first_name && this.family_name){
-        fullname = this.family_name + "," + this.first_name
+       return  fullname = this.family_name + "," + this.first_name
     }
     if(!this.firstname || !this.family_name){
-        fullname = ""
+       return  fullname = ""
     }
 
     return fullname;
@@ -25,7 +26,8 @@ AuthorSchema.virtual("name").get(function(){
 
 //Virtual for author's lifespan
 AuthorSchema.virtual("lifespan").get(function(){
-    return (this.date_of_death.getYear() - this.date_of_birth.getYear()).toString();
+    //return this.date_of_death ? moment(this.date_of_death).format("YYYY") : "" +" - " +this.date_of_birth ? moment(this.date_of_birth).format("YYYY"): "";
+    return this.date_of_birth ? moment(this.date_of_birth).format("YYYY") : ""
 })
 
 //Virtual for author's URL

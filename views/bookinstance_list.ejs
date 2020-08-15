@@ -2,6 +2,7 @@
 <h1><%=title %></h1>
 <ul class="list-group">
     <% if(bookinstance_list.length > 0){%>
+        <% bookinstance_list.sort((a,b)=>{let textA = a.book.title.toUpperCase(); let textB = b.book.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;}) %>
         <% bookinstance_list.forEach(val=>{ %>
             <li class="list-group-item">
                 <a href="<%= val.url %>"><%= val.book.title %></a>: <%= val.book.imprint %> - 

@@ -7,8 +7,9 @@ var GenreSchema = new Schema({
 
 //Creating a virtual for the url of the book instance
 GenreSchema.virtual("url").get(function(){
-    return "/catalog/genre" + this._id;
+    return "/catalog/genre/" + this._id;
 });
+
 
 //Export the model
 module.exports = mongoose.model("Genre", GenreSchema);
