@@ -1,18 +1,23 @@
 <%- include("./partials/header") -%>
-    <h1><%= title %></h1>
-    <ul class="list-group">
-    <% if(book_list.length > 0){ %>
-        <% book_list.sort((a,b)=>{let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;})%>
-        <% book_list.forEach(book =>{ %>
-            
-                <li class="list-group-item">
-                    <a href="<%= book.url %>"><%= book.title %></a>(<%= book.author.first_name%>, <%= book.author.family_name %>)
-                </li>
-        <% }) %>
-    </ul>
-    <% } else{ %>
-            <p>There are no books found</p>
-    <% } %>
+<div class="container mt-5">
+    <div>
+        <h1><%= title %></h1>
+        <ul class="list-group">
+        <% if(book_list.length > 0){ %>
+            <% book_list.sort((a,b)=>{let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;})%>
+            <% book_list.forEach(book =>{ %>
+                
+                    <li class="list-group-item">
+                        <a href="<%= book.url %>"><%= book.title %></a>(<%= book.author.first_name%>, <%= book.author.family_name %>)
+                    </li>
+            <% }) %>
+        </ul>
+        <% } else{ %>
+                <p>There are no books found</p>
+        <% } %>
+    </div>
+</div>
+    
     
     
 <%- include("./partials/footer") -%>

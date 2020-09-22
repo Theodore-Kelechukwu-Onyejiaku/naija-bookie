@@ -1,5 +1,26 @@
+h1,h2,h3,h4,h5,h6{
+  font-family: serif;
+}
 .sidebar-nav {
   margin-top: 20px;
   padding: 0;
   list-style: none;
+}
+
+nav a{
+  transition: all 10s;
+  /* background-image: linear-gradient(black, aqua); */
+}
+nav a:hover{
+  border-bottom:2px solid orange;
+  animation: navLink 0.3s ease-out
+}
+
+@keyframes navLink{
+  0%{
+    background-image: linear-gradient(to right, blue,blue, white);
+  }
+  100%{
+    background-image: linear-gradient(to right, white,orange, orange);
+  }
 }
