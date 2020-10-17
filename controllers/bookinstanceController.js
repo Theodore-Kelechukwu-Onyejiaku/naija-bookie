@@ -1,4 +1,8 @@
 var BookInstance = require('../models/bookinstance');
+var Genre = require("../models/genre");
+var Author = require("../models/author");
+var async = require("async");
+var moment = require("moment");
 
 // Display list of all BookInstances.
 exports.bookinstance_list = function(req, res, next) {
@@ -15,7 +19,25 @@ exports.bookinstance_list = function(req, res, next) {
 
 // Display detail page for a specific BookInstance.
 exports.bookinstance_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance detail: ' + req.params.id);
+    BookInstance.findById(req.params.id)
+    .populate("book")
+    .exec((err, book)=>{
+        if(err) return next(err);
+
+        async.parallel({
+            book_genre_detail: function(callback){
+                Genre.findById(book.book.genre)
+                .exec(callback)
+            },
+            author_detail: function(callback){
+                Author.findById(book.book.author)
+                .exec(callback)
+            }
+        }, function(err, result){
+            res.render("bookinstance_detail", {title: "BookInstance detail", book_instance: book, due_back : moment(book.due_back).format("MMMM Do, YYYY"), author_detail: result.author_detail, book_genre_detail: result.book_genre_detail})
+        })
+        
+    })
 };
 
 // Display BookInstance create form on GET.

@@ -1,0 +1,38 @@
+<%- include("partials/header") %>
+
+<h1> <%= title %></h1>
+
+<p>
+    <strong>Title:</strong><%= book_instance.book.title %>
+</p>
+<p>
+    <strong>Author:</strong>
+    <a href="<%= author_detail.url %>"><%= author_detail.name %> </a>
+</p>
+<p>
+    <strong>Summary:</strong><%= book_instance.book.summary %>
+</p>
+<p>
+    <strong>ISBN:</strong><%= book_instance.book.isbn %>
+</p>
+<p>
+    <strong>GENRE:</strong><a href="<%=book_genre_detail.url %>"><%= book_genre_detail.name %></a>
+</p>
+<hr>
+<p>
+    <strong>Status:</strong>
+    <% if(book_instance.status === "Available"){ %>
+        <span class="text-success"><%= book_instance.status %></span>
+    <% }else if(book_instance.status === "Maintenance"){ %>
+        <span class="text-danger"><%= book_instance.status %></span>
+    <% }else{ %>
+        <% if(book_instance.status !== "Available"){ %>
+            <span class="text-warning"><%= book_instance.status %></span>
+        <% } %>
+    <% } %>
+</p>
+
+<p><strong>Due back:</strong><%= due_back %></p>
+
+
+<%- include("partials/footer") %>
