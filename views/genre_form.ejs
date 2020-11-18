@@ -1,0 +1,23 @@
+<%- include("./partials/header") -%>
+<div class="container">
+    <h1><%= title %></h1>
+    <% var genre; var errors %>
+    <div class="col-sm-12 col-md-6">
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="name">Genre:</label>
+                <% if(genre === undefined){ %>
+                    <input type="text" id="name" class="form-control" placeholder="Fantasy, Poetry etc." name="name" value="">
+                <% }else{ %>
+                    <input type="text" id="name" class="form-control" placeholder="Fantasy, Poetry etc." name="name" value="<%= genre.name %>">
+                <% }%>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+        <% if(errors){ %>
+            <span class="text-danger"><%= errors %></span>
+        <% } %>
+    </div>
+</div>
+
+<%- include("./partials/footer") -%>

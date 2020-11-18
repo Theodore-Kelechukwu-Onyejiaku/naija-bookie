@@ -6,13 +6,17 @@
       <p>Error getting dynamin content</p>
     <% } else{ %>
       <p>The library has the following record counts</p>
-      <ul>
-        <li><strong>Books: <%= data.book_count %></strong></li>
-        <li><strong>Copies: <%= data.book_instance_count %></strong></li>
-        <li><strong>Copies available: <%= data.book_instance_available_count %></strong></li>
-        <li><strong>Authors: <%= data.author_count %></strong></li>
-        <li><strong>Genres: <%= data.genre_count %></strong></li>
-      </ul>
+      <div class="row">
+        <div class="col-12 m-auto">
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Books: <%= data.book_count %></strong></li>
+            <li class="list-group-item"><strong>Copies: <%= data.book_instance_count %></strong></li>
+            <li class="list-group-item"><strong>Copies available: <%= data.book_instance_available_count %></strong></li>
+            <li class="list-group-item"><strong>Authors: <%= data.author_count %></strong></li>
+            <li class="list-group-item"><strong>Genres: <%= data.genre_count %></strong></li>
+          </ul>
+        </div>
+      </div>
     <% } %>
   
 
