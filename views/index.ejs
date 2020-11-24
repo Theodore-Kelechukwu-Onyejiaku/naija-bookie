@@ -1,19 +1,23 @@
 <%- include("partials/header") %>
+<div class="jumbotron my-jumbo">
+  <h3>Welcome to Book Hut <br>
+    Here you get to do a lot more than just read books.
+  </h3>
+</div>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <h1>Dynamic content</h1>
     <% if(error){ %>
-      <p>Error getting dynamin content</p>
+      <p>Error getting dynamic content</p>
     <% } else{ %>
       <p>The library has the following record counts</p>
       <div class="row">
-        <div class="col-12 m-auto">
-          <ul class="list-group">
-            <li class="list-group-item"><strong>Books: <%= data.book_count %></strong></li>
-            <li class="list-group-item"><strong>Copies: <%= data.book_instance_count %></strong></li>
-            <li class="list-group-item"><strong>Copies available: <%= data.book_instance_available_count %></strong></li>
-            <li class="list-group-item"><strong>Authors: <%= data.author_count %></strong></li>
-            <li class="list-group-item"><strong>Genres: <%= data.genre_count %></strong></li>
+        <div class="col-sm-12 col-md-6 ">
+          <ul class="list-group my-jumbo">
+            <li class="list-group-item"><strong>Books: <span class="badge badge-info"><%= data.book_count %></span> </strong></li>
+            <li class="list-group-item"><strong>Copies: <span class="badge badge-info"><%= data.book_instance_count %></span> </strong></li>
+            <li class="list-group-item"><strong>Copies available: <span class="badge badge-info"><%= data.book_instance_available_count %></span></strong></li>
+            <li class="list-group-item"><strong>Authors: <span class="badge badge-info"><%= data.author_count %></span> </strong></li>
+            <li class="list-group-item"><strong>Genres: <span class="badge badge-info"><%= data.genre_count %></span></strong></li>
           </ul>
         </div>
       </div>

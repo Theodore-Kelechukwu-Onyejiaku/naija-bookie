@@ -1,6 +1,13 @@
 <%- include("./partials/header") -%>
 
-<h2 class="text-success">Genre: <%= genre.name %></h2>
+
+
+<div class="jumbotron my-jumbo">
+    <h3>This describes what a particular book is</h3>
+</div>
+<div class="breadcrumb col-sm-6 col-md-4">
+    <h4> <span class="breadcrumb-item text-success">Genre:</span> <span><%= genre.name %></span> </h4>
+</div>
 <div style="margin-left: 20px; margin-top:20px">
     <h4>Books</h4>
     <% if(genre_books.length > 0){ %>
