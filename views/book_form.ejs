@@ -1,0 +1,75 @@
+<%- include("./partials/header") -%>
+<div class="jumbotron my-jumbo">
+    <h3>Create a Genre for yourself</h3>
+</div>
+<div class="container">
+    <h1><%= title %></h1>
+    <% var genres; var authors; var book; var errors %>
+
+    <form action="" method="POST" >
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <% if(book === undefined){ %>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Name of book"  value="">
+                    <% }else{ %>
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Name of book"  value="<%= book.title %>">
+                    <% } %>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <select name="author" id="author" class="form-control"  placeholder="Select Author">
+                        <% authors.forEach(author =>{ %>
+                            <% if(book){ %>
+                                <% if(author._id.toString() ===  book.author._id.toString()){ %>
+                                    <option value="<%= author._id %>" selected = "selected" > <%= author.name %> </option>
+                                <% }else{ %>
+                                    <option value="<%= author._id %>" selected = false > <%= author.name %> </option>
+                                <% } %>
+                            <% }else{ %>
+                                <option value="<%= author._id %>"><%= author.name %></option>
+                            <% } %>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="summary">Summary</label>
+                    <% if(book === undefined){ %>
+                        <textarea class="form-control" name="summary" id="summary" rows="6"   value="" placeholder="Summary"></textarea>
+                    <% }else{ %>
+                        <textarea class="form-control" name="summary" id="summary" rows="6"   value="<%= book.summary %>" placeholder="Summary"></textarea>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="isbn">ISBN: </label>
+                    <% if(book === undefined){ %>
+                        <input type="text" class="form-control" name="isbn" id="isbn"   value="" placeholder="ISBN13"/>
+                    <% }else{ %>
+                        <input type="text" class="form-control" name="isbn" id="isbn"   value="<%= book.isbn %>"  placeholder="ISBN13"/>
+                    <% } %>
+                </div>
+                <div class="form-group">
+                    <label for="genre">Genre:</label>
+                    <% genres.forEach(genre =>{ %>
+                        <input type="checkbox" class="checkbox-input" name="genre" id="<%= genre._id %>" value="<%= genre._id %>">
+                        <label for="<%= genre._id %>"> <%= genre.name %> </label>
+                    <% }) %>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Book</button><br>
+                <% if(errors){ %>
+                    <% errors.forEach((error)=>{ %>
+                        <span class="text-danger"><%= error.msg %></span><br>
+                    <% }) %>
+                <% } %>
+            </div>
+        </div>
+        
+        
+    </form>
+    
+</div>
+
+<%- include("./partials/footer") -%>

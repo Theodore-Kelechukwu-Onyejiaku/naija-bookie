@@ -1,5 +1,7 @@
 <%- include("partials/header") %>
 
+<% var book_genre_detail %>
+
 <h1> <%= title %></h1>
 
 <p>
@@ -15,9 +17,12 @@
 <p>
     <strong>ISBN:</strong><%= book_instance.book.isbn %>
 </p>
-<p>
-    <strong>GENRE:</strong><a href="<%=book_genre_detail.url %>"><%= book_genre_detail.name %></a>
-</p>
+<% if(book_genre_detail){ %>
+    <p>
+        <strong>GENRE:</strong><a href="<%=book_genre_detail.url %>"><%= book_genre_detail.name %></a>
+    </p>
+<% } %>
+
 <hr>
 <p>
     <strong>Status:</strong>

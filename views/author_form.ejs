@@ -1,0 +1,58 @@
+<%- include("./partials/header") -%>
+<div class="jumbotron my-jumbo">
+    <h3>Create a Genre for yourself</h3>
+</div>
+<div class="container">
+    <h1><%= title %></h1>
+    <% var author; var errors %>
+    <form action="" method="POST">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <% if(undefined === author){ %>
+                        <input type="text" class="form-control" id="first_name" placeholder="First name" name="first_name" required="true" value="">
+                    <% }else{ %>
+                        <input type="text" class="form-control" id="first_name" placeholder="First name" name="first_name" required="true" value="<%= author.first_name %>">
+                    <% } %>
+                </div>
+                <div class="form-group">
+                    <label for="family_name">Family Name:</label>
+                    <% if(undefined === author){ %>
+                        <input type="text" class="form-control" id="family_name" placeholder="Family name (surname) " name="family_name" required="true" value="">
+                    <% }else{ %>
+                        <input type="text" class="form-control" id="family_name" placeholder="Family name (surname) " name="family_name" required="true" value="<%= author.family_name %>">
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group ">
+                    <label for="date_of_birth">Date of birth</label>
+                    <% if(undefined === author){ %>
+                        <input type="date" class="form-control" id="date_of_birth"  name="date_of_birth"  value="">
+                    <% }else{ %>
+                        <input type="date" class="form-control" id="date_of_birth"  name="date_of_birth" value="<%= author.date_of_birth %>">
+                    <% } %>
+                </div>
+                <div class="form-group">
+                    <label for="date_of_death">Date of death</label>
+                    <% if(undefined === author){ %>
+                        <input type="date" class="form-control" id="date_of_death"  name="date_of_death" required="true" value="">
+                    <% }else{ %>
+                        <input type="date" class="form-control" id="date_of_death"  name="date_of_death" required="true" value="<%= author.date_of_death %>">
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <% if(errors){ %>
+        <% errors.forEach((error)=>{ %>
+            <span class="text-danger"><%= error.msg %></span>
+        <% }) %>
+    <% } %>
+</div>
+
+<%- include("./partials/footer") -%>

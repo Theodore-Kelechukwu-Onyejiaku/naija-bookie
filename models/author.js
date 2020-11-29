@@ -15,7 +15,7 @@ AuthorSchema.virtual("name").get(function(){
 //we want to make sure we handle the exception by returning an empty string for that case
     var fullname = "";
     if(this.first_name && this.family_name){
-       return  fullname = this.family_name + "," + this.first_name
+       return  fullname = this.family_name + " " + this.first_name
     }
     if(!this.firstname || !this.family_name){
        return  fullname = ""
