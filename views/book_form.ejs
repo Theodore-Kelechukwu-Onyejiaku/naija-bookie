@@ -1,7 +1,10 @@
 <%- include("./partials/header") -%>
+<%- include("partials/books/take_control") %>
+
 <div class="jumbotron my-jumbo">
     <h3>Create a Genre for yourself</h3>
 </div>
+
 <div class="container">
     <h1><%= title %></h1>
     <% var genres; var authors; var book; var errors %>
@@ -58,6 +61,10 @@
                         <label for="<%= genre._id %>"> <%= genre.name %> </label>
                     <% }) %>
                 </div>
+                <div class="form-group">
+                    <label for="picture">Book Picture</label>
+                    <input type="file" name="picture" class="form-control-file border" id="picture" required>
+                </div>
                 <button type="submit" class="btn btn-primary">Create Book</button><br>
                 <% if(errors){ %>
                     <% errors.forEach((error)=>{ %>
@@ -71,5 +78,12 @@
     </form>
     
 </div>
+<script>
+    var picture = document.getElementById("picture");
+    console.log("hello");
+    picture.addEventListener("input", (e)=>{
+        console.log(picture.value);
+    })
+</script>
 
 <%- include("./partials/footer") -%>

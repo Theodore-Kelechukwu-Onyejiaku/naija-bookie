@@ -17,39 +17,35 @@
   <body>
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/catalog">Book Library <img src="/images/library.png" alt=""></a>
+        <a class="navbar-brand" href="/catalog">Naija Bookie <img src="/images/library.png" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/catalog">Home <span class="sr-only">(current)</span></a>
-            </li>
+           
             <li class="nav-item">
-              <a class="nav-link" href="/catalog/books">All books <img src="/images/books.png" width="20px" alt=""></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/catalog/authors">All authors<img src="/images/authors.png" width="20px" alt=""></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/catalog/genres">All genres</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/catalog/bookinstances">All bookinstances</a>
+              <a class="nav-link" href="/catalog">Home <img src="/images/books.png" width="20px" alt=""></a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Take Control
+                For Books
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/catalog/author/create">Create new author</a>
-                <a class="dropdown-item" href="/catalog/genre/create">Create new genre</a>
-                <a class="dropdown-item" href="/catalog/book/create">Create new book</a>
-                <a class="dropdown-item" href="/catalog/bookinstance/create">Create new bookinstance</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="/catalog/books">All books <img src="/images/books.png" width="20px" alt=""></a>
+                <a class="dropdown-item" href="/catalog/authors">All authors<img src="/images/authors.png" width="20px" alt=""></a>
+                <a class="dropdown-item" href="/catalog/genres">All genres <img src="/images/authors.png" width="20px" alt=""> </a>
+              </div>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Stories
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/catalog/author/create">Write a Story</a>
+                <a class="dropdown-item" href="/catalog/genre/create">Read Stories</a>
               </div>
             </li>
             <li><button class="btn btn-info" data-toggle="modal" data-target="#myModal">Login</button></li>

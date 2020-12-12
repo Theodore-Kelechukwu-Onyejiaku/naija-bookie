@@ -1,5 +1,5 @@
-var Author = require("../models/author");
-var Book = require("../models/book")
+var Author = require("../../models/author");
+var Book = require("../../models/book")
 var async = require("async");
 var moment = require("moment")
 

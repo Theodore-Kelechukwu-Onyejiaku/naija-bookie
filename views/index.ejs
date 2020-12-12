@@ -1,4 +1,6 @@
 <%- include("partials/header") %>
+
+
 <div class="jumbotron my-jumbo">
   <h3>Welcome to Book Hut <br>
     Here you get to do a lot more than just read books.
@@ -14,8 +16,6 @@
         <div class="col-sm-12 col-md-6 ">
           <ul class="list-group my-jumbo">
             <li class="list-group-item"><strong>Books: <span class="badge badge-info"><%= data.book_count %></span> </strong></li>
-            <li class="list-group-item"><strong>Copies: <span class="badge badge-info"><%= data.book_instance_count %></span> </strong></li>
-            <li class="list-group-item"><strong>Copies available: <span class="badge badge-info"><%= data.book_instance_available_count %></span></strong></li>
             <li class="list-group-item"><strong>Authors: <span class="badge badge-info"><%= data.author_count %></span> </strong></li>
             <li class="list-group-item"><strong>Genres: <span class="badge badge-info"><%= data.genre_count %></span></strong></li>
           </ul>
@@ -23,6 +23,24 @@
       </div>
     <% } %>
   
+    <div style="position: fixed;right:0px;bottom:50%;">
+      <div class="toast" data-autohide="false">
+        <div class="toast-header">
+          <strong class="mr-auto text-primary">Naija Bookie</strong>
+          <small class="text-muted">Welcome Message</small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
+        </div>
+        <div class="toast-body">
+          Welcome back Theodore! We miss you!
+        </div>
+      </div>
+      
+    </div>
 
+    <script>
+      $(document).ready(function(){
+        $('.toast').toast('show');
+      });
+      </script>
 <%- include("partials/footer") %>
 
