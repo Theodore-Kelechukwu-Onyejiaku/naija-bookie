@@ -5,6 +5,7 @@
     <h3>Create a Genre for yourself</h3>
 </div>
 
+
 <div class="container">
     <h1><%= title %></h1>
     <% var genres; var authors; var book; var errors %>
@@ -47,14 +48,6 @@
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                    <label for="isbn">ISBN: </label>
-                    <% if(book === undefined){ %>
-                        <input type="text" class="form-control" name="isbn" id="isbn"   value="" placeholder="ISBN13"/>
-                    <% }else{ %>
-                        <input type="text" class="form-control" name="isbn" id="isbn"   value="<%= book.isbn %>"  placeholder="ISBN13"/>
-                    <% } %>
-                </div>
-                <div class="form-group">
                     <label for="genre">Genre:</label>
                     <% genres.forEach(genre =>{ %>
                         <input type="checkbox" class="checkbox-input" name="genre" id="<%= genre._id %>" value="<%= genre._id %>">
@@ -62,16 +55,41 @@
                     <% }) %>
                 </div>
                 <div class="form-group">
-                    <label for="picture">Book Picture</label>
-                    <input type="file" name="picture" class="form-control-file border" id="picture" required>
+                    <label for="fileup">Book Picture</label>
+                    <input type="file" value="" name="picture" id="fileup" required class="form-control"/>
+                    <!-- <input type="file" name="picture" class="form-control-file border" id="picture" required> -->
                 </div>
-                <button type="submit" class="btn btn-primary">Create Book</button><br>
+                <div class="form-group">
+                    <!-- <label for="isbn">ISBN: </label>
+                    <% if(book === undefined){ %>
+                        <input type="text" class="form-control" name="isbn" id="isbn"   value="" placeholder="ISBN13"/>
+                    <% }else{ %>
+                        <input type="text" class="form-control" name="isbn" id="isbn"   value="<%= book.isbn %>"  placeholder="ISBN13"/>
+                    <% } %> -->
+                    
+                    <div class="container">
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-8">
+                            <img
+                                class="image-fluid"
+                                style="max-width: 100%; height: auto;"
+                                src=""
+                                alt=""
+                                id="blah"
+                            />
+                          </div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Book</button><br>
                 <% if(errors){ %>
                     <% errors.forEach((error)=>{ %>
                         <span class="text-danger"><%= error.msg %></span><br>
                     <% }) %>
                 <% } %>
-            </div>
         </div>
         
         
