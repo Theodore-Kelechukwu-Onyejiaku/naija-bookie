@@ -9,7 +9,7 @@ const { body, validationResult } = require("express-validator");
 exports.author_list = function(req, res, next){
     Author.find()
     .then(data =>{
-        res.render("author_list", {title: "Author List", author_list : data})
+        res.render("books/author_list", {title: "Author List", author_list : data})
     })
     .catch(err =>{
         console.log(err)  
@@ -37,13 +37,13 @@ exports.author_detail = function(req, res, next){
             return next(err)
         }
 
-        res.render("author_detail", {title: "Author Detail",author: result.author,author_books: result.author_books, date_born: moment(result.author.date_of_birth).format("YYYY"), date_dead: moment(result.author.date_of_death).format("YYYY")})
+        res.render("books/author_detail", {title: "Author Detail",author: result.author,author_books: result.author_books, date_born: moment(result.author.date_of_birth).format("YYYY"), date_dead: moment(result.author.date_of_death).format("YYYY")})
     })
 }
 
 //Display Author create form on GET.
 exports.author_create_get = function(req, res){
-    res.render("author_form", { title : "Create Author"})
+    res.render("books/author_form", { title : "Create Author"})
 }
 
 //Handle Author create on POST

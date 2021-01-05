@@ -1,0 +1,39 @@
+<%- include("../partials/header") %>
+<%- include("../partials/books/take_control") %>
+
+
+<h1>Title: <%= title %></h1>
+<p>
+    <strong>Author</strong>
+    <a href="<%= book.author.url %>"><%= book.author.name %></a>
+</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <img src="<%= book.picture %>" class="image-fluid" style="max-width:100%;height:auto" alt="book picture">
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <p>
+                <strong>Summary:</strong> <%= book.summary %>
+            </p>
+        </div>
+    </div>
+</div>
+
+<p>
+    <strong>ISBN:</strong><%= book.isbn %>
+</p>
+<p>
+    <strong>Genre:</strong>&nbsp;
+    <% book.genre.forEach((genre, index, array)=>{ %>
+        <% if(index == array.length - 1){ %>
+            <a href="<%= genre.url %>"><%= genre.name %></a>
+        <% }else{ %>
+            <a href="<%= genre.url %>"><%= genre.name %>,</a>
+        <% } %>
+    <% }) %>
+</p>
+
+</div>
+    
+<%- include("../partials/footer") %>

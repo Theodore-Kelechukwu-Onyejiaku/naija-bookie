@@ -1,5 +1,5 @@
-<%- include("./partials/header") -%>
-<%- include("partials/books/take_control") %>
+<%- include("../partials/header") -%>
+<%- include("../partials/books/take_control") %>
 
 <div class="jumbotron my-jumbo">
     <h3>Create a Genre for yourself</h3>
@@ -10,7 +10,7 @@
     <h1><%= title %></h1>
     <% var genres; var authors; var book; var errors %>
 
-    <form action="" method="POST" >
+    <form action="" method="POST" enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
@@ -25,15 +25,7 @@
                     <label for="author">Author</label>
                     <select name="author" id="author" class="form-control"  placeholder="Select Author">
                         <% authors.forEach(author =>{ %>
-                            <% if(book){ %>
-                                <% if(author._id.toString() ===  book.author._id.toString()){ %>
-                                    <option value="<%= author._id %>" selected = "selected" > <%= author.name %> </option>
-                                <% }else{ %>
-                                    <option value="<%= author._id %>" selected = false > <%= author.name %> </option>
-                                <% } %>
-                            <% }else{ %>
-                                <option value="<%= author._id %>"><%= author.name %></option>
-                            <% } %>
+                            <option value="<%= author._id %>"><%= author.name %></option>
                         <% }) %>
                     </select>
                 </div>
@@ -42,13 +34,13 @@
                     <% if(book === undefined){ %>
                         <textarea class="form-control" name="summary" id="summary" rows="6"   value="" placeholder="Summary"></textarea>
                     <% }else{ %>
-                        <textarea class="form-control" name="summary" id="summary" rows="6"   value="<%= book.summary %>" placeholder="Summary"></textarea>
+                        <textarea class="form-control" name="summary" id="summary" rows="6"   value="<%= book.summary %>" placeholder="Summary"><%= book.summary %></textarea>
                     <% } %>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
-                    <label for="genre">Genre:</label>
+                    <label for="genre">Genre:</label><br>
                     <% genres.forEach(genre =>{ %>
                         <input type="checkbox" class="checkbox-input" name="genre" id="<%= genre._id %>" value="<%= genre._id %>">
                         <label for="<%= genre._id %>"> <%= genre.name %> </label>
@@ -84,6 +76,9 @@
                     </div>
                 </div>
             </div>
+            
+        </div>
+        <div style="text-align: center;">
             <button type="submit" class="btn btn-primary">Create Book</button><br>
                 <% if(errors){ %>
                     <% errors.forEach((error)=>{ %>
@@ -91,7 +86,6 @@
                     <% }) %>
                 <% } %>
         </div>
-        
         
     </form>
     
@@ -104,4 +98,4 @@
     })
 </script>
 
-<%- include("./partials/footer") -%>
+<%- include("../partials/footer") -%>
