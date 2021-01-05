@@ -9,7 +9,7 @@
 </p>
 <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-6">
+        <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
             <img src="<%= book.picture %>" class="image-fluid" style="max-width:100%;height:auto" alt="book picture">
         </div>
         <div class="col-sm-12 col-md-6 col-lg-6">
@@ -18,22 +18,19 @@
             </p>
         </div>
     </div>
+
+    <p>
+        <strong>Genre:</strong>&nbsp;
+        <% book.genre.forEach((genre, index, array)=>{ %>
+            <% if(index == array.length - 1){ %>
+                <a href="<%= genre.url %>"><%= genre.name %></a>
+            <% }else{ %>
+                <a href="<%= genre.url %>"><%= genre.name %>,</a>
+            <% } %>
+        <% }) %>
+    </p>
+    <h1 class="text-info">Comments</h1>
 </div>
-
-<p>
-    <strong>ISBN:</strong><%= book.isbn %>
-</p>
-<p>
-    <strong>Genre:</strong>&nbsp;
-    <% book.genre.forEach((genre, index, array)=>{ %>
-        <% if(index == array.length - 1){ %>
-            <a href="<%= genre.url %>"><%= genre.name %></a>
-        <% }else{ %>
-            <a href="<%= genre.url %>"><%= genre.name %>,</a>
-        <% } %>
-    <% }) %>
-</p>
-
 </div>
     
 <%- include("../partials/footer") %>
