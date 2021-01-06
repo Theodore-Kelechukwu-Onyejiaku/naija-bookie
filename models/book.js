@@ -17,7 +17,8 @@ var BookSchema = new Schema({
     picture: {type: String, required: true},
     summary : {type : String, require: true},
     genre : [{type: Schema.Types.ObjectId, ref : "Genre"}],
-    comments: CommentSchema
+    comments: CommentSchema,
+    whoCreated: {type: Schema.Types.ObjectId, ref: "User"}
 })
 
 //Virtual for Book's URL

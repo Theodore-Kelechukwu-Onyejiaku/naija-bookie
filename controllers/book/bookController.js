@@ -2,6 +2,8 @@ var Book = require('../../models/book');
 var Author = require('../../models/author');
 var Genre = require('../../models/genre');
 const bodyParser = require("body-parser");
+const Comment = require("../../models/comment");
+
 
 
 
@@ -183,3 +185,19 @@ exports.book_update_get = function(req, res, next) {
 exports.book_update_post = function(req, res, next) {
     res.send('NOT IMPLEMENTED: Book update POST');
 };
+
+
+//COMMENTS
+// exports.getComments = async (req, res, next) => {
+//     try {
+//       let poem = await Book.findById({ _id: req.params.id }).populate("comments");
+  
+//       if (poem == null) {
+//         return res.status(404).json("No such poem exists");
+//       }
+  
+//       res.render("", {poem: poem});
+//     } catch (error) {
+//       next(error);
+//     }
+//   };

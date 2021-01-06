@@ -7,13 +7,13 @@ var logger = require('morgan');
 require('dotenv').config()
 
 var indexRouter = require('./routes/book/index');
-// var usersRouter = require('./routes/book/users');
+var userRouter = require('./routes/book/users');
 var catalogRouter = require("./routes/book/catalog");
 
 var app = express();
 var mongoose = require("mongoose");
 var mongoDB = process.env.DB_LOCAL;
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 var db = mongoose.connections;
 db.concat("error", console.error.bind(console, "MongoDB connection error."));
 
@@ -28,8 +28,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
 app.use("/catalog", catalogRouter);
+app.use("/user", userRouter);
+app.use("*", indexRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

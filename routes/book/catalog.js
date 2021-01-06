@@ -5,7 +5,7 @@ var router = express.Router();
 var book_controller = require('../../controllers/book/bookController');
 var author_controller = require('../../controllers/book/authorController');
 var genre_controller = require('../../controllers/book/genreController');
-var {upload} = require("../../middlewares/uploadBookImage")
+var {upload} = require("../../middlewares/uploadBookImage");
 
 
 // GET catalog home page.
@@ -86,6 +86,11 @@ router.get('/genre/:id', genre_controller.genre_detail);
 
 // GET request for list of all Genre.
 router.get('/genres', genre_controller.genre_list);
+
+
+
+//COMMENTS
+// router.get("/book/:id/comments", book_controller.getComments);
 
 
 module.exports = router;
