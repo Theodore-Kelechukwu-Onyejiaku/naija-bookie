@@ -26,7 +26,15 @@ exports.index = function(req, res, next) {
             Genre.countDocuments({}, callback);
         }
     }, function(err, results) {
-        res.render("books/index", { title: 'Naija Bookie', error: err, data: results });
+
+        var welcomedUser;
+        if(req.user){
+            welcomedUser = undefined;
+        }else{
+            var welcomedUser = req.user;
+        }
+
+        res.render("books/index", { title: 'Naija Bookie', error: err, data: results, user: req.user, welcomedUser: welcomedUser});
     });
 };
 

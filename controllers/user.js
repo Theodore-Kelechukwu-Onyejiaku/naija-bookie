@@ -3,6 +3,10 @@ const bcrypt = require("bcryptjs");
 const validation = require("../middlewares/validation/login_signupValidation");
 const User = require("../models/user");
 const cookie = require("cookie-parser");
+const async = require("async");
+var Book = require('../models/book');
+var Author = require('../models/author');
+var Genre = require('../models/genre');
 
 /**
  *      FOR /users/signup
@@ -58,18 +62,18 @@ exports.singnup = async (req, res, next) => {
       if (error) {
         var err = new Error(error.details[0].message);
         err.status = 404;
-        return next(err);
+        return res.render("signin", {error: err, title: "SignIn", body: body})
       }
       let user = await User.findOne({ username: req.body.username });
   
       if (!user) {
-        res.render("signin", {error: "Username or password incorrect!", title: "SignIn", body: body})
+        return res.render("signin", {error: "Username or password incorrect!", title: "SignIn", body: body})
       }
   
       var passwordCorrect = bcrypt.compare(req.body.password, user.password);
       //If passwords does not match
       if (!passwordCorrect) {
-        res.render("signin", {error: "Username or password incorrect!", title: "SignIn", body: body})
+        return res.render("signin", {error: "Username or password incorrect!", title: "SignIn", body: body})
       }
   
       //Create and assign Token
@@ -78,11 +82,14 @@ exports.singnup = async (req, res, next) => {
       });
   
       res.cookie('auth', token);
-      if(req.cookies.protectedUrl !== undefined);{
-        res.redirect(req.cookies.protectedUrl);
+      if(req.cookies.protectedUrl !== undefined){
+        console.log("The requested url:", req.cookies.protectedUrl);
+        return res.redirect(req.cookies.protectedUrl);
       }
-      res.redirect("/");
-      
+
+
+    res.redirect("/catalog");
+     
     } catch (error) {
       res.render("signIn", {error: error, title: "SignIn", body: body})
     }
