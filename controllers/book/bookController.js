@@ -33,8 +33,8 @@ exports.index = function(req, res, next) {
         }else{
             var welcomedUser = req.user;
         }
-
-        res.render("books/index", { title: 'Naija Bookie', error: err, data: results, user: req.user, welcomedUser: welcomedUser});
+    
+        res.render("books/index", { title: 'Naija Bookie', error: err, data: results, user: req.user || JSON.stringify(req.cookies.user), welcomedUser: welcomedUser});
     });
 };
 

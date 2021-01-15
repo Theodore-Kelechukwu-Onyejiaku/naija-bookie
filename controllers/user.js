@@ -54,9 +54,6 @@ exports.singnup = async (req, res, next) => {
   exports.signin = async (req, res, next) => {
     let body = req.body;
     try {
-
-      
-
       //if signup username and password fail validation
       const { error } = await validation.validate(req.body);
       if (error) {
@@ -70,24 +67,29 @@ exports.singnup = async (req, res, next) => {
         return res.render("signin", {error: "Username or password incorrect!", title: "SignIn", body: body})
       }
   
-      var passwordCorrect = bcrypt.compare(req.body.password, user.password);
-      //If passwords does not match
+     
+      var passwordCorrect = await bcrypt.compare(req.body.password, user.password);
+
+      //If password does not match
       if (!passwordCorrect) {
+        console.log("Password doesn't match")
         return res.render("signin", {error: "Username or password incorrect!", title: "SignIn", body: body})
       }
   
       //Create and assign Token
       var token = await jwt.sign(user.toJSON(), process.env.TOKEN_SECRET, {
-        expiresIn: "24h",
+        expiresIn: "10m",
       });
   
       res.cookie('auth', token);
       if(req.cookies.protectedUrl !== undefined){
         console.log("The requested url:", req.cookies.protectedUrl);
+        res.cookie("user", user);
+        console.log("line this:"+req.cookies.user);
         return res.redirect(req.cookies.protectedUrl);
       }
 
-
+    
     res.redirect("/catalog");
      
     } catch (error) {
@@ -105,6 +107,7 @@ exports.singnup = async (req, res, next) => {
 
   exports.logout = async (req, res, next) => {
     res.cookie('auth', "");
-      res.redirect("/");
+  
+    res.redirect("/");
   };
   
