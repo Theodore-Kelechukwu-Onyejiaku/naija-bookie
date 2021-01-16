@@ -10,7 +10,7 @@ var verification = require("../../middlewares/validation/validateToken");
 
 
 // GET catalog home page.
-router.get('/',  book_controller.index);
+router.get('/', verification.verifyIfLoggedIn, book_controller.index);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
 router.get('/book/create', book_controller.book_create_get);

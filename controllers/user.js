@@ -82,15 +82,15 @@ exports.singnup = async (req, res, next) => {
       });
   
       res.cookie('auth', token);
+      res.cookie("browserToken", token);
       if(req.cookies.protectedUrl !== undefined){
         console.log("The requested url:", req.cookies.protectedUrl);
-        res.cookie("user", user);
-        console.log("line this:"+req.cookies.user);
         return res.redirect(req.cookies.protectedUrl);
       }
 
     
-    res.redirect("/catalog");
+   
+    res.redirect("/");
      
     } catch (error) {
       res.render("signIn", {error: error, title: "SignIn", body: body})
@@ -106,8 +106,7 @@ exports.singnup = async (req, res, next) => {
   }
 
   exports.logout = async (req, res, next) => {
-    res.cookie('auth', "");
-  
+    res.clearCookie("auth");
+    res.clearCookie("browserToken");
     res.redirect("/");
   };
-  

@@ -28,11 +28,11 @@
         <div class="toast" data-autohide="false">
           <div class="toast-header">
             <strong class="mr-auto text-primary">Naija Bookie</strong>
-            <small class="text-muted">Welcome Message</small>
+            <small class="text-muted">Hi <%= user.username %>!</small>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
           </div>
           <div class="toast-body">
-            Welcome back Theodore! We miss you!
+            Welcome back <span class="text-success"><%= user.username %>!</span> We miss you!
           </div>
         </div>
         

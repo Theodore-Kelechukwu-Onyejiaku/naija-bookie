@@ -3,6 +3,8 @@ var Author = require('../../models/author');
 var Genre = require('../../models/genre');
 const bodyParser = require("body-parser");
 const Comment = require("../../models/comment");
+const jwt = require("jsonwebtoken");
+const cookie = require("cookie-parser");
 
 
 
@@ -12,7 +14,6 @@ var {body, validationResult } = require("express-validator");
 
 
 exports.index = function(req, res, next) {
-
     //The async_parallel allows you to run multiple queries. It accepts two parameters, the object(where you have the functions and the callback to take the results)
     async.parallel({
         book_count: function(callback) {
@@ -28,13 +29,9 @@ exports.index = function(req, res, next) {
     }, function(err, results) {
 
         var welcomedUser;
-        if(req.user){
-            welcomedUser = undefined;
-        }else{
-            var welcomedUser = req.user;
-        }
-    
-        res.render("books/index", { title: 'Naija Bookie', error: err, data: results, user: req.user || JSON.stringify(req.cookies.user), welcomedUser: welcomedUser});
+        welcomedUser = req.user;
+
+        res.render("books/index", { title: 'Naija Bookie', error: err, data: results, user: req.user, welcomedUser: welcomedUser});
     });
 };
 
