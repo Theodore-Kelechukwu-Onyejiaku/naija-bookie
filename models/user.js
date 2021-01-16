@@ -7,11 +7,12 @@ const MessageSchema = new Schema({
 })
 
 const UserSchema = new Schema({
-    fullName: {type: String, required: true},
     username: {type: String, required: true, unique: true},
+    email: {type: String, unique: true},
     password: {type: String, required: true},
-    about: {type: String, about: true},
-    stories: [],
+    about: {type: String},
+    profilePicture: {type: String},
+    fullName: {type: String},
     messages: MessageSchema,
 })
 

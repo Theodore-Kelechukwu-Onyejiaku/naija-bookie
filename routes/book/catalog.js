@@ -5,17 +5,18 @@ var router = express.Router();
 var book_controller = require('../../controllers/book/bookController');
 var author_controller = require('../../controllers/book/authorController');
 var genre_controller = require('../../controllers/book/genreController');
+var {upload} = require("../../middlewares/uploadBookImage");
+var verification = require("../../middlewares/validation/validateToken");
 
-/// BOOK ROUTES ///
 
 // GET catalog home page.
-router.get('/', book_controller.index);
+router.get('/', verification.verifyIfLoggedIn, book_controller.index);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
 router.get('/book/create', book_controller.book_create_get);
 
 // POST request for creating Book.
-router.post('/book/create', book_controller.book_create_post);
+router.post('/book/create',  upload.single("picture"), book_controller.book_create_post);
 
 // GET request to delete Book.
 router.get('/book/:id/delete', book_controller.book_delete_get);
@@ -86,6 +87,11 @@ router.get('/genre/:id', genre_controller.genre_detail);
 
 // GET request for list of all Genre.
 router.get('/genres', genre_controller.genre_list);
+
+
+
+//COMMENTS
+// router.get("/book/:id/comments", book_controller.getComments);
 
 
 module.exports = router;
