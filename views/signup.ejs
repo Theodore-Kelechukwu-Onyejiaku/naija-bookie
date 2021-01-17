@@ -14,15 +14,34 @@
             <%= error %>
           </div>
         <% } %>
-        <div class="form-group">
+        
           <% if (body == undefined){ %>
-            <label for="username">Username:</label>
-            <input type="username" class="form-control" placeholder="Enter your usernmae" id="username" name="username">
+            <div class="form-group">
+              <label for="username">First Name:</label>
+              <input type="text" class="form-control" placeholder="First Name" id="username" name="firstname">
+            </div>
+            <div class="form-group">
+              <label for="username">Last Name:</label>
+              <input type="text" class="form-control" placeholder="Last name" id="lastname" name="lastname">
+            </div>
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="username" class="form-control" placeholder="Enter your usernmae" id="username" name="username">
+            </div>
           <% }else{ %>
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" placeholder="Enter your username" id="username" name="username" value="<%= body.username %>">
+            <div class="form-group">
+              <label for="username">First Name:</label>
+              <input type="text" class="form-control" placeholder="First Name" id="username" name="firstname" value="<%= body.firstname %>">
+            </div>
+            <div class="form-group">
+              <label for="username">Last Name:</label>
+              <input type="text" class="form-control" placeholder="Last name" id="lastname" name="lastname" value="<%= body.lastname %>">
+            </div>
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" placeholder="Enter your username" id="username" name="username" value="<%= body.username %>">
+            </div>
           <% } %>
-        </div>
         <div class="form-group">
           <label for="pwd">Password:</label>
           <input type="password" class="form-control" placeholder="Enter password" id="pwd" name="password">

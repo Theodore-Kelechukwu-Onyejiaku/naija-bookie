@@ -12,7 +12,8 @@ const UserSchema = new Schema({
     password: {type: String, required: true},
     about: {type: String},
     profilePicture: {type: String},
-    fullName: {type: String},
+    firstName: {type: String},
+    lastName: {type: String},
     messages: MessageSchema,
 })
 
