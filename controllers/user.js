@@ -23,24 +23,26 @@ exports.singnup = async (req, res, next) => {
       const { error } = await validation.validate(req.body);
       if (error) {
         var err = new Error(error.details[0].message);
-        res.render("signup", {error: err, title: "SignUp", body: body})
+        return res.render("signup", {error: err, title: "SignUp", body: body})
       }
   
       let user = await User.findOne({ username: req.body.username });
       //If user already exists in database
       if (user) {
-        res.render("signin", {error: "Username already exits in database", title: "SignUp", body: body})
+        return res.render("signup", {error: "Username already exits!", title: "SignUp", body: body})
       }
   
       var salt = await bcrypt.genSalt(10);
       const hashPassword = await bcrypt.hash(req.body.password, salt);
       var newUser = new User({
         username: req.body.username,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         password: hashPassword,
       });
   
       await newUser.save();
-      res.render("signin", {message: "SignUp Successful!", title: "SignIn"})
+      return res.render("signin", {message: "SignUp Successful!", title: "SignIn"})
     } catch (error) {
       next(error);
     }
@@ -93,7 +95,7 @@ exports.singnup = async (req, res, next) => {
     res.redirect("/");
      
     } catch (error) {
-      res.render("signIn", {error: error, title: "SignIn", body: body})
+      res.render("signin", {error: error, title: "SignIn", body: body})
     }
   };
   
