@@ -1,5 +1,8 @@
 <%- include("../partials/header") -%>
-<%- include("../partials/books/take_control") %>
+<% var user %>
+<% if(user){ %>
+    <%- include("../partials/books/take_control") %>
+<% } %>
 
 <div class="container mt-5">
     <div>

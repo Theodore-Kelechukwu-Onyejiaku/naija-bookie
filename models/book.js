@@ -1,15 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var CommentSchema = new Schema({
-    user: {type: Schema.Types.ObjectId, ref: "User"},
-    comment: {type: String},
-    replies: [{type: String}],
-},
-{
-    timestamps: true
-}
-)
 
 var BookSchema = new Schema({
     title :{ type: String, required : true },
@@ -17,8 +8,11 @@ var BookSchema = new Schema({
     picture: {type: String, required: true},
     summary : {type : String, require: true},
     genre : [{type: Schema.Types.ObjectId, ref : "Genre"}],
-    comments: CommentSchema,
-    whoCreated: {type: Schema.Types.ObjectId, ref: "User"}
+    comments: [{type: Schema.Types.ObjectId, ref: "Comment"}],
+    whoCreated: {type: Schema.Types.ObjectId, ref: "User"},
+    reason: {type: String, required: true}
+}, {
+    timestamps: true
 })
 
 //Virtual for Book's URL

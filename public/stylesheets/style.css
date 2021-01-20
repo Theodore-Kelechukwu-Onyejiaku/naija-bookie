@@ -1,5 +1,5 @@
 h1,h2,h3,h4,h5,h6{
-  font-family: serif;
+  font-family: sans-serif;
 }
 .sidebar-nav {
   margin-top: 20px;
@@ -23,6 +23,11 @@ nav a:hover{
   border-left: 3px solid orange
 }
 
+.my-jumbo-box{
+  padding: 2%;
+  text-align: center;
+  border: 3px solid orange;
+}
 @keyframes navLink{
   0%{
     background-image: linear-gradient(to right, blue,blue, white);
