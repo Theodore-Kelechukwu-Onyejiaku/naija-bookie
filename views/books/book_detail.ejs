@@ -24,13 +24,16 @@
                                 <img src="<%= book.picture %>" class="image-fluid" style="max-width:100%;height:auto"
                                     alt="book picture">
                                 <div class="my-jumbo-box">
-                                    <button class="btn btn-info" data-toggle="tooltip" title="Like this book"
+                                    <form action="/catalog/book/<%= book._id %>/like" method="POST" style="display: inline;">
+                                        <button type="submit" class="btn btn-info" data-toggle="tooltip" title="Like this book"
                                         data-placement="top">
-                                        <i class="fa fa-thumbs-up"></i><span class="badge badge-info">1</span>
-                                    </button>
+                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info"><%= book.like.length %></span>
+                                        </button>
+                                    </form>
+                                    
                                     <button class="btn btn-success" data-toggle="tooltip" title="Comment on this book"
                                         data-placement="top">
-                                        <i class="fa fa-comment"></i><span class="badge badge-success">1</span>
+                                        <i class="fa fa-comment"></i><span class="badge badge-success"><%= book.comments.length %></span>
                                     </button>
                                     <button class="btn btn-secondary" data-target="#shareModal" data-toggle="modal"
                                         data-toggle="tooltip" title="Share socially" data-placement="top">
@@ -101,17 +104,16 @@
 
                                     <% if(book.comments.length> 0){ %>
                                         <% book.comments.forEach( eachBookComment=>{ %>
-                                            <div class="card my-jumbo mb-5">
-                                                <div class="card-header">
-                                                    <h5><a href="/user/<%= eachBookComment.whoCommented._id %>"
-                                                            style="text-decoration: underline;">
-                                                            <%= eachBookComment.whoCommented.username%>
-                                                        </a></h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <%= eachBookComment.comment%>
-                                                </div>
-                                                <div class="card-footer">
+                                            <div class="media border p-3">
+                                                <img src="/images/theo.jpg" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                                                <div class="media-body">
+                                                    <h4>
+                                                        <a href="/user/<%= eachBookComment.whoCommented._id %>" style="text-decoration: underline;">
+                                                        <%= eachBookComment.whoCommented.username%>
+                                                        </a>
+                                                        </h5><small><i><%= eachBookComment.date %></i></small>
+                                                    </h4>
+                                                    <p><%= eachBookComment.comment%></p>
                                                     <button class="btn btn-info" data-toggle="tooltip"
                                                         title="Like this comment" data-placement="top">
                                                         <i class="fa fa-thumbs-up"></i><span
@@ -124,8 +126,6 @@
                                                     </button>
                                                 </div>
                                             </div>
-
-
                                             <% }) %>
                                                 <% } else { %>
                                                     <p class="text-danger">No comments at the moment. You can be the

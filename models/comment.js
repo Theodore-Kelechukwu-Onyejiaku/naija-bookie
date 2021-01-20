@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const moment = require("moment");
 
 const replySchema = new Schema(
   {
@@ -22,5 +23,12 @@ const commentSchema = new Schema(
     timestamps: true,
   }
 );
+
+
+commentSchema.virtual("date").get(function(){
+  return moment(this.createdAt).format("MMMM Do, YYYY");
+});
+
+
 
 module.exports = mongoose.model("Comment", commentSchema);

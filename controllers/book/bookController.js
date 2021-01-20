@@ -264,3 +264,43 @@ exports.book_post_comment = async(req, res, next) =>{
       }
 }
 
+// Like or unlike
+exports.book_post_like = async (req, res, next) => {
+    try {
+      let book = await Book.findById(req.params.id);
+  
+      if (book == null) {
+        return res.status(400).json("No such book exists");
+      }
+  
+      //Check if the person has reacted before
+      var hasLiked;
+      
+      for (let i = 0; i < book.like.length; i++) {
+        if (book.like[i] === req.user._id) {
+          hasLiked = true;
+          break;
+        } else {
+          hasLiked = false;
+        }
+      }
+  
+      if (hasLiked) {
+        book.like.id(req.user._id).remove();
+  
+        console.log("user has liked this already!")
+        await book.save();
+  
+        return res.redirect("/catalog/book/"+req.params.id)
+      }
+  
+      book.like.push(req.user._id);
+      console.log("user has not liked this oooo!")
+      await book.save();
+      // console.log(book.likes)
+      res.redirect("/catalog/book/"+req.params.id)
+    } catch (error) {
+      next(error);
+    }
+  };
+  

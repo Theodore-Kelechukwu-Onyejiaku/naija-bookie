@@ -10,7 +10,8 @@ var BookSchema = new Schema({
     genre : [{type: Schema.Types.ObjectId, ref : "Genre"}],
     comments: [{type: Schema.Types.ObjectId, ref: "Comment"}],
     whoCreated: {type: Schema.Types.ObjectId, ref: "User"},
-    reason: {type: String, required: true}
+    reason: {type: String, required: true},
+    like: [{type: Schema.Types.ObjectId, ref: "User"}]
 }, {
     timestamps: true
 })
