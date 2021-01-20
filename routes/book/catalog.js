@@ -13,28 +13,30 @@ var verification = require("../../middlewares/validation/validateToken");
 router.get('/', verification.verifyIfLoggedIn, book_controller.index);
 
 // GET request for creating a Book. NOTE This must come before routes that display Book (uses id).
-router.get('/book/create', book_controller.book_create_get);
+router.get('/book/create',verification.verifyIfLoggedIn, book_controller.book_create_get);
 
 // POST request for creating Book.
 router.post('/book/create',  upload.single("picture"), book_controller.book_create_post);
 
+router.post("/book/:id/comment", verification.verifyIfLoggedIn);
+
 // GET request to delete Book.
-router.get('/book/:id/delete', book_controller.book_delete_get);
+router.get('/book/:id/delete',verification.verifyIfLoggedIn, book_controller.book_delete_get);
 
 // POST request to delete Book.
 router.post('/book/:id/delete', book_controller.book_delete_post);
 
 // GET request to update Book.
-router.get('/book/:id/update', book_controller.book_update_get);
+router.get('/book/:id/update', verification.verifyIfLoggedIn, book_controller.book_update_get);
 
 // POST request to update Book.
 router.post('/book/:id/update', book_controller.book_update_post);
 
 // GET request for one Book.
-router.get('/book/:id', book_controller.book_detail);
+router.get('/book/:id', verification.verifyIfLoggedIn, book_controller.book_detail);
 
 // GET request for list of all Book items.
-router.get('/books', book_controller.book_list);
+router.get('/books',verification.verifyIfLoggedIn, book_controller.book_list);
 
 /// AUTHOR ROUTES ///
 

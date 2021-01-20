@@ -28,6 +28,9 @@ exports.index = function(req, res, next) {
         }
     }, function(err, results) {
 
+        if(err){
+            return next(err)
+        }
         var welcomedUser;
         welcomedUser = req.user;
 
@@ -45,7 +48,7 @@ exports.book_list = function(req, res, next) {
         if(err){ return next(err)}
 
         //If successful
-        res.render("books/book_list", {title: "Book List", book_list: list_books})
+        res.render("books/book_list", {title: "Book List",user: req.user, book_list: list_books})
     })    
 };
 
@@ -57,6 +60,7 @@ exports.book_detail = function(req, res, next) {
             Book.findById(req.params.id)
                 .populate("author")
                 .populate("genre")
+                .populate("whoCreated")
                 .exec(callback)
         }
     },function(err, results){
@@ -89,7 +93,7 @@ exports.book_create_get = function(req, res, next) {
         },
     }, function(err, results) {
         if (err) { return next(err); }
-        res.render("books/book_form", { title: 'Create Book', authors: results.authors, genres: results.genres});
+        res.render("books/book_form", { title: 'Create Book', authors: results.authors, genres: results.genres, user: req.user});
     });
     
 };
@@ -111,11 +115,33 @@ exports.book_create_post = [
     body('title', 'Title must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('author', 'Author must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('reason', 'Reason must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('genre.*').escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
-        
+        async.parallel({
+            authors: function(callback) {
+                Author.find(callback);
+            },
+            genres: function(callback) {
+                Genre.find(callback);
+            },
+        }, function(err, results) {
+            if (err) { return next(err); }
+
+            // Mark our selected genres as checked.
+            for (let i = 0; i < results.genres.length; i++) {
+                if (req.body.genre.indexOf(results.genres[i]._id) > -1) {
+                    results.genres[i].checked='true';
+                }
+            }
+            if(req.fileValidationError){
+               return  res.render("books/book_form", { title: 'Create Book',authors:results.authors, genres:results.genres, book: req.body, fileError: req.fileValidationError });
+            }
+        });
+       
+                
         console.log(req.file);
 
         //image file
@@ -130,11 +156,14 @@ exports.book_create_post = [
           { title: req.body.title,
             author: req.body.author,
             summary: req.body.summary,
+            reason: req.body.reason,
             isbn: req.body.isbn,
             genre: req.body.genre,
-            picture : picture
+            picture : picture,
+            whoCreated : req.body.whoCreated
            });
 
+           
         if (!errors.isEmpty()) {
             // There are errors. Render form again with sanitized values/error messages.
 

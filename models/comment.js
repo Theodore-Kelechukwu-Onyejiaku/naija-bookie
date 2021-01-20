@@ -16,6 +16,7 @@ const commentSchema = new Schema(
     whoCommented: { type: String },
     comment: { type: String },
     replies: [replySchema],
+    like: [{type: Schema.Types.ObjectId, ref: "User"}]
   },
   {
     timestamps: true,

@@ -9,7 +9,7 @@ exports.genre_list = function (req, res, next) {
     if (err) {
       next(err);
     } else {
-      res.render("genre_list", { title: "Genre List", genre_list: doc });
+      res.render("books/genre_list", { title: "Genre List", genre_list: doc });
     }
   });
 };
@@ -39,7 +39,7 @@ exports.genre_detail = function (req, res, next) {
       }
 
       //Successful, so render
-      res.render("genre_detail", {
+      res.render("books/genre_detail", {
         title: "Genre Detail",
         genre: results.genre,
         genre_books: results.genre_books,
@@ -50,7 +50,7 @@ exports.genre_detail = function (req, res, next) {
 
 // Display Genre create form on GET.
 exports.genre_create_get = function (req, res) {
-  res.render("genre_form", { title: "Create Genre" });
+  res.render("books/genre_form", { title: "Create Genre" });
 };
 
 // Handle Genre create on POST.
@@ -69,7 +69,7 @@ exports.genre_create_post = [
     if (!errors.isEmpty()) {
       // There are errors. Render the form again with sanitized values/error messages.
       console.log(errors.array())
-      res.render("genre_form", {
+      res.render("books/genre_form", {
         title: "Create Genre",
         genre: genre,
         errors: errors.array(),

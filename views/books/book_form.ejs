@@ -1,5 +1,9 @@
 <%- include("../partials/header") -%>
-<%- include("../partials/books/take_control") %>
+<% var user %>
+<% if(user){ %>
+    <%- include("../partials/books/take_control") %>
+<% } %>
+
 
 <div class="jumbotron my-jumbo">
     <h3>Create a Genre for yourself</h3>
@@ -8,7 +12,7 @@
 
 <div class="container">
     <h1><%= title %></h1>
-    <% var genres; var authors; var book; var errors %>
+    <% var genres; var authors; var book; var errors; var fileError %>
 
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="row">
@@ -29,14 +33,19 @@
                         <% }) %>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="summary">Summary</label>
-                    <% if(book === undefined){ %>
+                <% if(book === undefined){ %>
+                    <div class="form-group">
+                        <label for="summary">Summary</label>
                         <textarea class="form-control" name="summary" id="summary" rows="6"   value="" placeholder="Summary"></textarea>
-                    <% }else{ %>
+                    </div>
+                    
+                <% }else{ %>
+                    <div class="form-group">
+                        <label for="summary">Summary</label>
                         <textarea class="form-control" name="summary" id="summary" rows="6"   value="<%= book.summary %>" placeholder="Summary"><%= book.summary %></textarea>
-                    <% } %>
-                </div>
+                    </div>
+                    
+                <% } %>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
@@ -46,9 +55,23 @@
                         <label for="<%= genre._id %>"> <%= genre.name %> </label>
                     <% }) %>
                 </div>
+                <% if(book == undefined){ %>
+                    <div class="form-group">
+                        <label for="reason">Reason</label>
+                        <textarea class="form-control" name="reason" id="reason" rows="6"   value="" placeholder="Why should people read this book?"></textarea>
+                    </div>
+                <% }else{ %>
+                    <div class="form-group">
+                        <label for="reason">Reason</label>
+                        <textarea class="form-control" name="reason id="summary" rows="6"   value="<%= book.reason %>" placeholder=""><%= book.reason %></textarea>
+                    </div>
+                <% } %>
                 <div class="form-group">
                     <label for="fileup">Book Picture</label>
                     <input type="file" value="" name="picture" id="fileup" required class="form-control"/>
+                    <% if(fileError){ %>
+                        <span class="text-danger"><%= fileError %></span><br>
+                    <% } %>
                     <!-- <input type="file" name="picture" class="form-control-file border" id="picture" required> -->
                 </div>
                 <div class="form-group">
@@ -59,32 +82,36 @@
                         <input type="text" class="form-control" name="isbn" id="isbn"   value="<%= book.isbn %>"  placeholder="ISBN13"/>
                     <% } %> -->
                     
-                    <div class="container">
-                        <div class="row">
-                          <div class="col-sm-2"></div>
-                          <div class="col-sm-8">
-                            <img
-                                class="image-fluid"
-                                style="max-width: 100%; height: auto;"
-                                src=""
-                                alt=""
-                                id="blah"
-                            />
-                          </div>
-                          <div class="col-sm-2"></div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             
         </div>
         <div style="text-align: center;">
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-8">
+                    <img
+                        class="image-fluid"
+                        style="max-width: 100%; height: auto;"
+                        src=""
+                        alt=""
+                        id="blah"
+                    />
+                  </div>
+                  <div class="col-sm-2"></div>
+                </div>
+            </div>
+            <p></p>
+            <input type="hidden" name="whoCreated" value="<%= user._id %>">
             <button type="submit" class="btn btn-primary">Create Book</button><br>
                 <% if(errors){ %>
                     <% errors.forEach((error)=>{ %>
                         <span class="text-danger"><%= error.msg %></span><br>
                     <% }) %>
                 <% } %>
+                
         </div>
         
     </form>

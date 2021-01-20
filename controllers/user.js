@@ -112,3 +112,24 @@ exports.singnup = async (req, res, next) => {
     res.clearCookie("browserToken");
     res.redirect("/");
   };
+
+  exports.getDetail = async(req, res, next) =>{
+    async.parallel({
+      user: function(callback){
+        User.findById(req.params.id)
+        .exec(callback)
+      },  
+      booksCreated: function(callback){
+        Book.find({"whoCreated": req.params.id})
+            .populate("author")
+            .populate("genre")
+            .exec(callback)
+      }
+    }, function(err, results){
+      if(err){
+        return next(err);
+      }
+
+      res.render("user/profile", {userProfile: results.user, booksCreated: results.booksCreated, title: "User Profile", user: req.user})
+    })
+  }
