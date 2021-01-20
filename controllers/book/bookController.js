@@ -60,6 +60,8 @@ exports.book_detail = function(req, res, next) {
             Book.findById(req.params.id)
                 .populate("author")
                 .populate("genre")
+                .populate({path: "comments", populate: {path: "whoCommented"}})
+                .populate("whoCommented")
                 .populate("whoCreated")
                 .exec(callback)
         }
@@ -74,9 +76,9 @@ exports.book_detail = function(req, res, next) {
             return next(err)
         }
 
+        console.log(results.book.comments.whoCommented)
         //Successful
-        console.log(results.book_instance)
-        res.render("books/book_detail", {title: results.book.title, book: results.book})
+        res.render("books/book_detail", {title: results.book.title, book: results.book, user: req.user})
     })
 };
 
@@ -200,6 +202,7 @@ exports.book_create_post = [
     }
 ];
 
+
 // Display book delete form on GET.
 exports.book_delete_get = function(req, res, next) {
     res.send('NOT IMPLEMENTED: Book delete GET');
@@ -235,3 +238,29 @@ exports.book_update_post = function(req, res, next) {
 //       next(error);
 //     }
 //   };
+
+// ADD COMMENTS TO BOOK
+exports.book_post_comment = async(req, res, next) =>{
+    try {
+        console.log(req.body);
+        var newComment = new Comment({
+            comment: req.body.comment,
+            whoCommented: req.body.whoCommented,
+        });
+    
+        let book = await Book.findById(req.params.id).populate("comments");
+    
+        if (book == null) {
+          return res.status(404).json("No such poem exists");
+        }
+        book.comments.push(newComment);
+    
+        await newComment.save();
+        // console.log(newComment);
+        await book.save();
+        res.redirect("/catalog/book/"+req.params.id);
+      } catch (error) {
+        next(error);
+      }
+}
+

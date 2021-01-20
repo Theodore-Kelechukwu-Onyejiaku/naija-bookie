@@ -80,7 +80,7 @@ exports.singnup = async (req, res, next) => {
   
       //Create and assign Token
       var token = await jwt.sign(user.toJSON(), process.env.TOKEN_SECRET, {
-        expiresIn: "10m",
+        expiresIn: "59m",
       });
   
       res.cookie('auth', token);

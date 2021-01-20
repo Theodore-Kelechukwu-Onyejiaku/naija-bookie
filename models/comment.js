@@ -13,7 +13,7 @@ const replySchema = new Schema(
 
 const commentSchema = new Schema(
   {
-    whoCommented: { type: String },
+    whoCommented: { type: Schema.Types.ObjectId, ref: "User" },
     comment: { type: String },
     replies: [replySchema],
     like: [{type: Schema.Types.ObjectId, ref: "User"}]

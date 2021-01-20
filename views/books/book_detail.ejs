@@ -7,9 +7,10 @@
                     <h1>Title: <%= title %>
                     </h1>
                     <h3> By: <a href="/user/<%= book.whoCreated._id %>" class="text-info">
-                          <img src="kskfaksf" alt="" width="80" height="80" alt="profile">  <%= book.whoCreated.username %> 
+                            <img src="kskfaksf" alt="" width="80" height="80" alt="profile">
+                            <%= book.whoCreated.username %>
                         </a> <span> </span>
-                        Date Created: 
+                        Date Created:
                     </h3>
                     <p>
                         <strong>Author</strong>
@@ -22,45 +23,50 @@
                             <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
                                 <img src="<%= book.picture %>" class="image-fluid" style="max-width:100%;height:auto"
                                     alt="book picture">
-                                    <div class="my-jumbo-box">
-                                        <button class="btn btn-info" data-toggle="tooltip" title="Like this book" data-placement="top">
-                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info">1</span>
-                                        </button>
-                                        <button class="btn btn-success"  data-toggle="tooltip" title="Comment on this book" data-placement="top">
-                                            <i class="fa fa-comment"></i><span class="badge badge-success">1</span>
-                                        </button>
-                                        <button class="btn btn-secondary" data-target="#shareModal" data-toggle="modal"  data-toggle="tooltip" title="Share socially" data-placement="top">
-                                            <i class="fa fa-share"></i>
-                                        </button>
-            
-                                        <!-- START OF SHARE MODAL -->
-                                        <div class="modal" id="shareModal">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-            
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Share for others to see</h4>
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    </div>
-            
-                                                    <!-- Modal body -->
-                                                    <div>
-                                                        <a class="twitter-share-button"href="https://twitter.com/intent/tweet">Tweet</a>
-                                                    </div>
-            
-                                                    <!-- Modal footer -->
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-info"
-                                                            data-dismiss="modal">Close</button>
-                                                    </div>
-            
+                                <div class="my-jumbo-box">
+                                    <button class="btn btn-info" data-toggle="tooltip" title="Like this book"
+                                        data-placement="top">
+                                        <i class="fa fa-thumbs-up"></i><span class="badge badge-info">1</span>
+                                    </button>
+                                    <button class="btn btn-success" data-toggle="tooltip" title="Comment on this book"
+                                        data-placement="top">
+                                        <i class="fa fa-comment"></i><span class="badge badge-success">1</span>
+                                    </button>
+                                    <button class="btn btn-secondary" data-target="#shareModal" data-toggle="modal"
+                                        data-toggle="tooltip" title="Share socially" data-placement="top">
+                                        <i class="fa fa-share"></i>
+                                    </button>
+
+                                    <!-- START OF SHARE MODAL -->
+                                    <div class="modal" id="shareModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Share for others to see</h4>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
                                                 </div>
+
+                                                <!-- Modal body -->
+                                                <div>
+                                                    <a class="twitter-share-button"
+                                                        href="https://twitter.com/intent/tweet">Tweet</a>
+                                                </div>
+
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-info"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+
                                             </div>
                                         </div>
-                                        <!-- END OF SHARE MODAL -->
-            
                                     </div>
+                                    <!-- END OF SHARE MODAL -->
+
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6">
                                 <p>
@@ -88,46 +94,89 @@
                                         <% } %>
                                             <% }) %>
                         </p>
-                        
-                        
-                        <div class="container">
                             <div class="row">
+                                <div class="col-sm-12 col-md-2"></div>
                                 <div class="col-sm-12 col-md-8">
                                     <h3 class="text-info my-jumbo-box">Comments</h3>
-                                    <div class="card my-jumbo">
-                                        <div class="card-header">
-                                            <a href="#" style="text-decoration: underline;">Theodore Kelechukwu</a>
-                                        </div>
-                                        <div class="card-body">
-                                            This is the comment of this book. This is the user's comment!
-                                        </div>
-                                        <div class="card-footer">
-                                            <button class="btn btn-info" data-toggle="tooltip" title="Like this comment" data-placement="top">
-                                                <i class="fa fa-thumbs-up"></i><span class="badge badge-info">1</span>
-                                            </button>
-                                            <button class="btn btn-success"  data-toggle="tooltip" title="Reply this comment" data-placement="top">
-                                                <i class="fa fa-reply"></i><span class="badge badge-success">1</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <p></p>
-                                    <form action="">
-                                        <div class="clearfix">
-                                            <div class="form-group">
-                                                <textarea style="width: 80%" class="form-control float-right" name="" id="" placeholder="Enter your comment"></textarea>
+
+                                    <% if(book.comments.length> 0){ %>
+                                        <% book.comments.forEach( eachBookComment=>{ %>
+                                            <div class="card my-jumbo mb-5">
+                                                <div class="card-header">
+                                                    <h5><a href="/user/<%= eachBookComment.whoCommented._id %>"
+                                                            style="text-decoration: underline;">
+                                                            <%= eachBookComment.whoCommented.username%>
+                                                        </a></h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <%= eachBookComment.comment%>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <button class="btn btn-info" data-toggle="tooltip"
+                                                        title="Like this comment" data-placement="top">
+                                                        <i class="fa fa-thumbs-up"></i><span
+                                                            class="badge badge-info">1</span>
+                                                    </button>
+                                                    <button class="btn btn-success" data-toggle="tooltip"
+                                                        title="Reply this comment" data-placement="top">
+                                                        <i class="fa fa-reply"></i><span
+                                                            class="badge badge-success">1</span>
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="text-right">
-                                            <input type="submit" value="Comment" class="btn btn-info">
-                                        </div>  
-                                    </form>
+
+
+                                            <% }) %>
+                                                <% } else { %>
+                                                    <p class="text-danger">No comments at the moment. You can be the
+                                                        first to comment!</p>
+                                                    <% } %>
+
+
+                                                        <p></p>
+                                                        <% if(user==undefined){ %>
+                                                            <form action="/catalog/book/<%= book._id %>/comment"
+                                                                method="POST">
+                                                                <div class="clearfix">
+                                                                    <div class="form-group">
+                                                                        <textarea style="width: 80%"
+                                                                            class="form-control float-right"
+                                                                            name="comment" id=""
+                                                                            placeholder="Enter your comment"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="text-right">
+                                                                    <input type="submit" value="Comment"
+                                                                        class="btn btn-info">
+                                                                </div>
+                                                            </form>
+                                                            <% } else {%>
+                                                                <form action="/catalog/book/<%= book._id %>/comment"
+                                                                    method="POST">
+                                                                    <div class="clearfix">
+                                                                        <div class="form-group">
+                                                                            <textarea style="width: 80%"
+                                                                                class="form-control float-right"
+                                                                                name="comment" id=""
+                                                                                placeholder="Enter your comment"></textarea>
+                                                                        </div>
+                                                                        <input type="hidden" name="whoCommented"
+                                                                            value="<%= user._id %>">
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="text-right">
+                                                                        <input type="submit" value="Comment"
+                                                                            class="btn btn-info">
+                                                                    </div>
+                                                                </form>
+                                                                <% } %>
+
                                 </div>
-                                
+                                <div class="col-sm-12 col-md-2"></div>
                             </div>
                         </div>
-                        
+
                     </div>
                     </div>
 

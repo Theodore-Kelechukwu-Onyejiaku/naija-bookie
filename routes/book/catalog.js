@@ -18,7 +18,7 @@ router.get('/book/create',verification.verifyIfLoggedIn, book_controller.book_cr
 // POST request for creating Book.
 router.post('/book/create',  upload.single("picture"), book_controller.book_create_post);
 
-router.post("/book/:id/comment", verification.verifyIfLoggedIn);
+router.post("/book/:id/comment", verification.verifyUser, book_controller.book_post_comment);
 
 // GET request to delete Book.
 router.get('/book/:id/delete',verification.verifyIfLoggedIn, book_controller.book_delete_get);
