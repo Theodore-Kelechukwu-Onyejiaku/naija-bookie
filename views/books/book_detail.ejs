@@ -4,8 +4,8 @@
             <%- include("../partials/books/take_control") %>
                 <% } %>
 
-                    <h1>Title: <%= title %>
-                    </h1>
+                    <h3>Title: <%= title %>
+                    </h3>
                     <h3> By: <a href="/user/<%= book.whoCreated._id %>" class="text-info">
                             <img src="kskfaksf" alt="" width="80" height="80" alt="profile">
                             <%= book.whoCreated.username %>
@@ -18,7 +18,7 @@
                             <%= book.author.name %>
                         </a>
                     </p>
-                    <div class="container">
+                    <div >
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-6 mb-5">
                                 <img src="<%= book.picture %>" class="image-fluid" style="max-width:100%;height:auto"
@@ -31,10 +31,10 @@
                                         </button>
                                     </form>
                                     
-                                    <button class="btn btn-success" data-toggle="tooltip" title="Comment on this book"
-                                        data-placement="top">
+                                    <a class="btn btn-success" data-toggle="tooltip" title="Comment on this book"
+                                        data-placement="top" href="#comment">
                                         <i class="fa fa-comment"></i><span class="badge badge-success"><%= book.comments.length %></span>
-                                    </button>
+                                    </a>
                                     <button class="btn btn-secondary" data-target="#shareModal" data-toggle="modal"
                                         data-toggle="tooltip" title="Share socially" data-placement="top">
                                         <i class="fa fa-share"></i>
@@ -98,12 +98,11 @@
                                             <% }) %>
                         </p>
                             <div class="row">
-                                <div class="col-sm-12 col-md-2"></div>
                                 <div class="col-sm-12 col-md-8">
                                     <h3 class="text-info my-jumbo-box">Comments</h3>
 
                                     <% if(book.comments.length> 0){ %>
-                                        <% book.comments.forEach( eachBookComment=>{ %>
+                                        <% book.comments.forEach( (eachBookComment, index)=>{ %>
                                             <div class="media border p-3">
                                                 <img src="/images/theo.jpg" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
                                                 <div class="media-body">
@@ -114,16 +113,45 @@
                                                         </h5><small><i><%= eachBookComment.date %></i></small>
                                                     </h4>
                                                     <p><%= eachBookComment.comment%></p>
-                                                    <button class="btn btn-info" data-toggle="tooltip"
-                                                        title="Like this comment" data-placement="top">
-                                                        <i class="fa fa-thumbs-up"></i><span
-                                                            class="badge badge-info">1</span>
-                                                    </button>
-                                                    <button class="btn btn-success" data-toggle="tooltip"
-                                                        title="Reply this comment" data-placement="top">
-                                                        <i class="fa fa-reply"></i><span
-                                                            class="badge badge-success">1</span>
-                                                    </button>
+                                                    <form action="/catalog/book/<%= book._id %>/comment/<%= eachBookComment._id %>/like" method="POST" style="display: inline;">
+                                                        <button type="submit" class="btn btn-info" data-toggle="tooltip" title="Like this book"
+                                                        data-placement="top">
+                                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info"><%= eachBookComment.like.length %></span>
+                                                        </button>
+                                                    </form>
+                                                    <% if(eachBookComment.replies.length > 0){ %>
+                                                        <p>Nothing</p>
+                                                        <% eachBookComment.replies.forEach( (comment, ind) =>{ %>
+                                                            <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#demo"+index>
+                                                                <i class="fa fa-reply"></i><span
+                                                                    class="badge badge-success"><%= eachBookComment.replies.length %></span>
+                                                            </button>
+                                                            <div id="demo"+index class="collapse">
+                                                                <div id="accordion">
+                                                                    <div class="card">
+                                                                      <div class="card-header">
+                                                                        <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                                                          Collapsible Group Item #1
+                                                                        </a>
+                                                                      </div>
+                                                                      <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                                                        <div class="card-body">
+                                                                          Lorem ipsum..
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <% }) %>
+                                                    <% }else{ %>
+                                                        <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#demo"+<% index %>>
+                                                            <i class="fa fa-reply"></i><span
+                                                                class="badge badge-success"><%= eachBookComment.replies.length %></span>
+                                                        </button>
+                                                        <div id="demo"+<% index %> class="collapse">
+                                                            <p class="text-danger">!Ooops No replies at the moment <% index %></p>
+                                                        </div>
+                                                    <% } %>
                                                 </div>
                                             </div>
                                             <% }) %>
@@ -154,12 +182,13 @@
                                                             <% } else {%>
                                                                 <form action="/catalog/book/<%= book._id %>/comment"
                                                                     method="POST">
-                                                                    <div class="clearfix">
+                                                                    <div class="clearfix" id="comment">
                                                                         <div class="form-group">
                                                                             <textarea style="width: 80%"
                                                                                 class="form-control float-right"
-                                                                                name="comment" id=""
-                                                                                placeholder="Enter your comment"></textarea>
+                                                                                name="comment" 
+                                                                                placeholder="Enter your comment">
+                                                                            </textarea>
                                                                         </div>
                                                                         <input type="hidden" name="whoCommented"
                                                                             value="<%= user._id %>">

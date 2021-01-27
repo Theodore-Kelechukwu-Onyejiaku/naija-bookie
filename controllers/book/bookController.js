@@ -60,6 +60,7 @@ exports.book_detail = function(req, res, next) {
             Book.findById(req.params.id)
                 .populate("author")
                 .populate("genre")
+                .populate("like")
                 .populate({path: "comments", populate: {path: "whoCommented"}})
                 .populate("whoCommented")
                 .populate("whoCreated")
@@ -275,32 +276,82 @@ exports.book_post_like = async (req, res, next) => {
   
       //Check if the person has reacted before
       var hasLiked;
-      
+      var likeIndex
       for (let i = 0; i < book.like.length; i++) {
-        if (book.like[i] === req.user._id) {
+        if (book.like[i] == req.user._id) {
+          console.log(book.like[i], req.user._id)
           hasLiked = true;
+          likeIndex= i;
           break;
         } else {
+            console.log(book.like[i], req.user._id)
           hasLiked = false;
         }
       }
-  
+      
+      console.log(hasLiked)
       if (hasLiked) {
-        book.like.id(req.user._id).remove();
-  
-        console.log("user has liked this already!")
+        Book.findByIdAndUpdate(req.params.id, {$pullAll: {like: [req.user._id]}}, {new: true}, async function(err, doc){
+            if(err){
+                return  res.status(404).json({"message": "Ooops! Something wrong happened"})
+            }
+            await doc.save();
+            console.log("hellooooo")
+             return res.redirect("/catalog/book/"+req.params.id)
+        })
+      }else{
+        book.like.push(req.user._id);
+        console.log("user has not liked this oooo!")
         await book.save();
-  
-        return res.redirect("/catalog/book/"+req.params.id)
+        // console.log(book.likes)
+        res.redirect("/catalog/book/"+req.params.id)
       }
-  
-      book.like.push(req.user._id);
-      console.log("user has not liked this oooo!")
-      await book.save();
-      // console.log(book.likes)
-      res.redirect("/catalog/book/"+req.params.id)
+        
     } catch (error) {
       next(error);
     }
   };
   
+  exports.book_comments_like_post = async(req, res, next)=>{
+        try {
+            
+            let comment = await Comment.findById(req.params.commentId)
+            console.log(comment)
+            //Check if the person has reacted before
+            var hasLiked;
+            var likeIndex
+            for (let i = 0; i < comment.like.length; i++) {
+                if (comment.like[i] == req.user._id) {
+                console.log(comment.like[i], req.user._id)
+                hasLiked = true;
+                likeIndex= i;
+                break;
+                } else {
+                    console.log(comment.like[i], req.user._id)
+                hasLiked = false;
+                }
+            }
+
+            console.log(hasLiked)
+            if (hasLiked) {
+                Comment.findByIdAndUpdate(req.params.commentId, {$pullAll: {like: [req.user._id]}}, {new: true}, async function(err, doc){
+                    if(err){
+                        return  res.status(404).json({"message": "Ooops! Something wrong happened"})
+                    }
+                    await doc.save();
+                    console.log("hellooooo")
+                    return res.redirect("/catalog/book/"+req.params.id)
+                })
+            }else{
+                comment.like.push(req.user._id);
+                console.log("user has not liked this oooo!")
+                await comment.save();
+                // console.log(book.likes)
+                res.redirect("/catalog/book/"+req.params.id)
+            }
+            
+
+        } catch (error) {
+            
+        }
+  }

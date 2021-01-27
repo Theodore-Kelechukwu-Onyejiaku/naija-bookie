@@ -4,7 +4,7 @@ const moment = require("moment");
 
 const replySchema = new Schema(
   {
-    whoReplied: { type: String },
+    whoReplied: { type: Schema.Types.ObjectId, ref: "User" },
     reply: { type: String },
   },
   {
