@@ -104,7 +104,14 @@
                                     <% if(book.comments.length> 0){ %>
                                         <% book.comments.forEach( (eachBookComment, index)=>{ %>
                                             <div class="media border p-3">
-                                                <img src="/images/theo.jpg" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                                                <% if(eachBookComment.whoCommented.profilePicture){ %>
+                                                    <img src="/images/theo.jpg" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                                                <% }else{ %>
+                                                    <figure class="story__shape">
+                                                        <img src="/images/theo.jpg" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                                                        <figcaption class="story__caption"><% eachBookComment.whoCommented.firstname %></figcaption>
+                                                    </figure>
+                                                <% } %>
                                                 <div class="media-body">
                                                     <h4>
                                                         <a href="/user/<%= eachBookComment.whoCommented._id %>" style="text-decoration: underline;">
@@ -144,11 +151,11 @@
                                                             </div>
                                                         <% }) %>
                                                     <% }else{ %>
-                                                        <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#demo"+<% index %>>
+                                                        <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#demo<%= index %>">
                                                             <i class="fa fa-reply"></i><span
                                                                 class="badge badge-success"><%= eachBookComment.replies.length %></span>
                                                         </button>
-                                                        <div id="demo"+<% index %> class="collapse">
+                                                        <div id="demo<%= index %>" class="collapse">
                                                             <p class="text-danger">!Ooops No replies at the moment <% index %></p>
                                                         </div>
                                                     <% } %>
@@ -184,7 +191,7 @@
                                                                     method="POST">
                                                                     <div class="clearfix" id="comment">
                                                                         <div class="form-group">
-                                                                            <textarea style="width: 80%"
+                                                                            <textarea
                                                                                 class="form-control float-right"
                                                                                 name="comment" 
                                                                                 placeholder="Enter your comment">
