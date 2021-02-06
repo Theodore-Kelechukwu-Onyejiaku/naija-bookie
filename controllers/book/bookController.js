@@ -61,6 +61,7 @@ exports.book_detail = function(req, res, next) {
                 .populate("author")
                 .populate("genre")
                 .populate("like")
+                .populate({path: "comments", populate: {path: "replies", populate : {path: "whoReplied"}}})
                 .populate({path: "comments", populate: {path: "whoCommented"}})
                 .populate("whoCommented")
                 .populate("whoCreated")
@@ -352,6 +353,19 @@ exports.book_post_like = async (req, res, next) => {
             
 
         } catch (error) {
-            
+            next(error);
         }
+  }
+
+
+  exports.book_comments_reply_post = async(req, res, next)=>{
+      try {
+            let comment = await Comment.findById(req.params.commentId).exec();
+            console.log(comment, req.body);
+            comment.replies.push(req.body);
+            await comment.save();
+            res.redirect("/catalog/book/"+req.params.id);
+      } catch (error) {
+            next(error);          
+      }
   }

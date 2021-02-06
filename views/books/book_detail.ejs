@@ -98,12 +98,12 @@
                                             <% }) %>
                         </p>
                             <div class="row">
-                                <div class="col-sm-12 col-md-8">
+                                <div class="col-sm-12 col-md-12">
                                     <h3 class="text-info my-jumbo-box">Comments</h3>
 
                                     <% if(book.comments.length> 0){ %>
                                         <% book.comments.forEach( (eachBookComment, index)=>{ %>
-                                            <div class="media border p-3">
+                                            <div class="media border p-3 mt-5">
                                                 <% if(eachBookComment.whoCommented.profilePicture){ %>
                                                     <img src="/images/theo.jpg" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
                                                 <% }else{ %>
@@ -126,37 +126,112 @@
                                                             <i class="fa fa-thumbs-up"></i><span class="badge badge-info"><%= eachBookComment.like.length %></span>
                                                         </button>
                                                     </form>
+                                                    <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#reply<%= index %>">
+                                                        <i class="fa fa-reply"></i><span
+                                                            class="badge badge-success"><%= eachBookComment.replies.length %></span>
+                                                    </button>
                                                     <% if(eachBookComment.replies.length > 0){ %>
-                                                        <p>Nothing</p>
-                                                        <% eachBookComment.replies.forEach( (comment, ind) =>{ %>
-                                                            <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#demo"+index>
-                                                                <i class="fa fa-reply"></i><span
-                                                                    class="badge badge-success"><%= eachBookComment.replies.length %></span>
-                                                            </button>
-                                                            <div id="demo"+index class="collapse">
+                                                        <div id="reply<%= index %>" class="collapse mt-2 mb-2">  
+                                                        <H4>Replies</H4>                                                      
+                                                        <% eachBookComment.replies.forEach( (reply, ind) =>{ %>
+                                                            
+                                                            
+                                                                
                                                                 <div id="accordion">
                                                                     <div class="card">
                                                                       <div class="card-header">
-                                                                        <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                                                                          Collapsible Group Item #1
-                                                                        </a>
+                                                                        <!-- <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                                                          Toggle
+                                                                        </a> -->
                                                                       </div>
                                                                       <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                                                                        <div class="card-body">
-                                                                          Lorem ipsum..
-                                                                        </div>
+                                                                        <div class="media border p-3">
+                                                                            <img src="/images/theo.jpg" alt="<%= reply.whoReplied.username %>" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                                                                            <div class="media-body">
+                                                                              
+                                                                              <h4>
+                                                                                    <a href="/user/<%= eachBookComment.whoCommented._id %>" style="text-decoration: underline;">
+                                                                                        <%= reply.whoReplied.username %>
+                                                                                    </a>
+                                                                                    </h5><small><i>Replied on <%= reply.date %></i></small>
+                                                                              </h4>
+                                                                              <p><%= reply.reply %></p>
+                                                                            </div>
+                                                                          </div>
                                                                       </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+
+                                                                
+                                                                
                                                         <% }) %>
+                                                        <!-- CHECK IF USER IF SIGNED IN ORDER TO REPLY -->
+                                                        <% if(user == undefined){ %>
+                                                            <p></p>
+                                                            <form method="POST" action="/catalog/book/<%= book._id %>/comment/<%= eachBookComment._id %>/reply" class="mb-2">
+                                                                <div class="form-group">
+                                                                    <textarea style="text-align: left;"
+                                                                        class="form-control"
+                                                                        name="reply" 
+                                                                        placeholder="Reply this comment"></textarea>
+                                                                </div>
+                                                                <input type="hidden" name="whoReplied" value="">
+                                                                <div class="text-right">
+                                                                    <input type="submit" value="Reply"
+                                                                        class="btn btn-info">
+                                                                </div>
+                                                            </form>
+                                                        <% }else{ %>    
+                                                            <p></p>
+                                                            <form method="POST" action="/catalog/book/<%= book._id %>/comment/<%= eachBookComment._id %>/reply" class="mb-2">                                                                        <div class="form-group">
+                                                                    <textarea style="text-align: left;"
+                                                                        class="form-control"
+                                                                        name="reply" 
+                                                                        placeholder="Reply this comment"></textarea>
+                                                                </div>
+                                                                <input type="hidden" name="whoReplied" value="<%= user._id %>">
+                                                                <div class="text-right">
+                                                                    <input type="submit" value="Reply"
+                                                                        class="btn btn-info">
+                                                                </div>
+                                                            </form>
+                                                        <% } %>
+                                                    </div>
                                                     <% }else{ %>
+                                                        
                                                         <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#demo<%= index %>">
                                                             <i class="fa fa-reply"></i><span
                                                                 class="badge badge-success"><%= eachBookComment.replies.length %></span>
                                                         </button>
                                                         <div id="demo<%= index %>" class="collapse">
                                                             <p class="text-danger">!Ooops No replies at the moment <% index %></p>
+                                                            <!-- CHECK IF USER IF SIGNED IN ORDER TO REPLY -->
+                                                            <% if(user == undefined){ %>
+                                                                <form method="POST" action="/catalog/book/<%= book._id %>/comment/<%= eachBookComment._id %>/reply">
+                                                                    <div class="form-group">
+                                                                        <textarea style="text-align: left;" class="form-control"
+                                                                            name="reply" 
+                                                                            placeholder="Reply this comment"></textarea>
+                                                                    </div>
+                                                                    <input type="hidden" name="whoReplied" value="">
+                                                                    <br>
+                                                                    <div class="text-right">
+                                                                        <input type="submit" value="Comment"
+                                                                            class="btn btn-info">
+                                                                    </div>
+                                                                </form>
+                                                            <% }else{ %>    
+                                                                <form method="POST" action="/catalog/book/<%= book._id %>/comment/<%= eachBookComment._id %>/reply">                                                                        <div class="form-group">
+                                                                        <textarea style="text-align: left;" class="form-control" name="reply" placeholder="Reply this comment"></textarea>
+                                                                    </div>
+                                                                    <input type="hidden" name="whoReplied" value="<%= user._id %>">
+                                                                    <br>
+                                                                    <div class="text-right">
+                                                                        <input type="submit" value="Reply"
+                                                                            class="btn btn-info">
+                                                                    </div>
+                                                                </form>
+                                                            <% } %>
                                                         </div>
                                                     <% } %>
                                                 </div>
@@ -177,7 +252,7 @@
                                                                         <textarea style="width: 80%"
                                                                             class="form-control float-right"
                                                                             name="comment" id=""
-                                                                            placeholder="Enter your comment"></textarea>
+                                                                            placeholder="Enter your comment for this book"></textarea>
                                                                     </div>
                                                                 </div>
                                                                 <br>
@@ -194,7 +269,7 @@
                                                                             <textarea
                                                                                 class="form-control float-right"
                                                                                 name="comment" 
-                                                                                placeholder="Enter your comment">
+                                                                                placeholder="Enter your comment for this book">
                                                                             </textarea>
                                                                         </div>
                                                                         <input type="hidden" name="whoCommented"
@@ -214,6 +289,6 @@
                         </div>
 
                     </div>
-                    </div>
+                </div>
 
                     <%- include("../partials/footer") %>

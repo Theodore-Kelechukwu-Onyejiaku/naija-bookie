@@ -11,6 +11,9 @@ const replySchema = new Schema(
     timestamps: true,
   }
 );
+replySchema.virtual("date").get(function(){
+  return moment(replySchema.createdAt).format("MMMM Do, YYYY");
+});
 
 const commentSchema = new Schema(
   {
