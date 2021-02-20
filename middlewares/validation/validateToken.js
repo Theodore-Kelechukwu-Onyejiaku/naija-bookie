@@ -26,22 +26,18 @@ exports.verifyUser = (req, res, next)=>{
 exports.verifyIfLoggedIn = (req, res, next) =>{
 
     if(req.cookies == undefined){
-        console.log("no cookie")
         next();
     }
    else if(req.cookies.browserToken !== undefined){
         jwt.verify(req.cookies.browserToken, process.env.TOKEN_SECRET, (err, token_data)=>{
             if(err){
-                console.log("error for token")
                 next()
             }else{
-                console.log("No error");
                 req.user = token_data
                 next();
             }
         })
     }else{
-        console.log("don't know oo")
         next();
     }
     
