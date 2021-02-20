@@ -55,8 +55,19 @@
                                                 <!-- Modal body -->
                                                 <div>
                                                     <a class="twitter-share-button"
-                                                        href="https://twitter.com/intent/tweet">Tweet</a>
+                                                        href="https://twitter.com/share?url=<% url %>" target="blank"><i class="fa fa-twitter fa-2x"></i>
+                                                    </a>
+                                                    <a href="" class="ml-3" target="blank">
+                                                        <i class="fa fa-linkedin fa-2x"></i>
+                                                    </a>
+                                                    <a href="" class="ml-3" target="blank">
+                                                        <i class="fa fa-whatsapp fa-2x"></i>
+                                                    </a>
+                                                    <a href="" class="ml-3" target="blank">
+                                                        <i class="fa fa-facebook fa-2x"></i>
+                                                    </a>
                                                 </div>
+                                                
 
                                                 <!-- Modal footer -->
                                                 <div class="modal-footer">
@@ -134,7 +145,6 @@
                                                         <div id="reply<%= index %>" class="collapse mt-2 mb-2">  
                                                         <H4>Replies</H4>                                                      
                                                         <% eachBookComment.replies.forEach( (reply, ind) =>{ %>
-                                                            
                                                             
                                                                 
                                                                 <div id="accordion">

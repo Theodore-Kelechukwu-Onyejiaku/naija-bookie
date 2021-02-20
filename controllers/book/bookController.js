@@ -79,8 +79,9 @@ exports.book_detail = function(req, res, next) {
         }
 
         console.log(results.book.comments.whoCommented)
+        var requestedUrl = req.protocol + '://' + req.get('Host') + req.url;
         //Successful
-        res.render("books/book_detail", {title: results.book.title, book: results.book, user: req.user})
+        res.render("books/book_detail", {title: results.book.title, book: results.book, user: req.user, url: requestedUrl})
     })
 };
 
