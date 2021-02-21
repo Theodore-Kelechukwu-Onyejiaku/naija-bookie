@@ -55,16 +55,16 @@
                                                 <!-- Modal body -->
                                                 <div>
                                                     <a class="twitter-share-button" href="https://twitter.com/share?url=url: <%= url %>&text=Book Title: <%= book.title %>&hashtags=naija_bookie" target="blank">
-                                                        <i class="fa fa-twitter fa-2x"></i>
+                                                        <i class="fa fa-twitter fa-2x" style="color: #1da1f2"></i>
                                                     </a>
                                                     <a href="https://linkedin.com/shareArticle?mini=true&amp;url=<%= url %>" class="ml-3" target="blank">
-                                                        <i class="fa fa-linkedin fa-2x"></i>
+                                                        <i class="fa fa-linkedin fa-2x" style="color: #0077b5"></i>
                                                     </a>
                                                     <a href="https://api.whatsapp.com/send?text=<%= url %>" class="ml-3" target="blank">
-                                                        <i class="fa fa-whatsapp fa-2x"></i>
+                                                        <i class="fa fa-whatsapp fa-2x" style="color: #075e54"></i>
                                                     </a>
                                                     <a href="https://www.facebook.com/sharer/sharer.php?u=<%= url %>" class="ml-3" target="blank">
-                                                        <i class="fa fa-facebook fa-2x"></i>
+                                                        <i class="fa fa-facebook fa-2x" style="color: #3b5998"></i>
                                                     </a>
                                                 </div>
                                                 
@@ -139,7 +139,7 @@
                                                         </button>
                                                     </form>
                                                     <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#reply<%= index %>">
-                                                        <i class="fa fa-reply"></i><span
+                                                        <i class="fa fa-comment"></i><span
                                                             class="badge badge-success"><%= eachBookComment.replies.length %></span>
                                                     </button>
                                                     <% if(eachBookComment.replies.length > 0){ %>
@@ -211,7 +211,7 @@
                                                     <% }else{ %>
                                                         
                                                         <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#demo<%= index %>">
-                                                            <i class="fa fa-reply"></i><span
+                                                            <i class="fa fa-comment"></i><span
                                                                 class="badge badge-success"><%= eachBookComment.replies.length %></span>
                                                         </button>
                                                         <div id="demo<%= index %>" class="collapse">
