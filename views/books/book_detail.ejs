@@ -54,19 +54,20 @@
 
                                                 <!-- Modal body -->
                                                 <div>
-                                                    <a class="twitter-share-button"
-                                                        href="https://twitter.com/share?url=<% url %>" target="blank"><i class="fa fa-twitter fa-2x"></i>
+                                                    <a class="twitter-share-button" href="https://twitter.com/share?url=url: <%= url %>&text=Book Title: <%= book.title %>&hashtags=naija_bookie" target="blank">
+                                                        <i class="fa fa-twitter fa-2x"></i>
                                                     </a>
-                                                    <a href="" class="ml-3" target="blank">
+                                                    <a href="https://linkedin.com/shareArticle?mini=true&amp;url=<%= url %>" class="ml-3" target="blank">
                                                         <i class="fa fa-linkedin fa-2x"></i>
                                                     </a>
-                                                    <a href="" class="ml-3" target="blank">
+                                                    <a href="https://api.whatsapp.com/send?text=<%= url %>" class="ml-3" target="blank">
                                                         <i class="fa fa-whatsapp fa-2x"></i>
                                                     </a>
-                                                    <a href="" class="ml-3" target="blank">
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=<%= url %>" class="ml-3" target="blank">
                                                         <i class="fa fa-facebook fa-2x"></i>
                                                     </a>
                                                 </div>
+                                                
                                                 
 
                                                 <!-- Modal footer -->
