@@ -15,5 +15,7 @@ userRouter.get("/logout", userController.logout);
 
 userRouter.get("/:id",verification.verifyIfLoggedIn, userController.getDetail);
 
+userRouter.post("/:id/update", verification.verifyUser, userController.updateUser)
+
 
 module.exports = userRouter;

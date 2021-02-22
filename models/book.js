@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var moment = require("moment");
 
 
 var BookSchema = new Schema({
@@ -20,6 +21,10 @@ var BookSchema = new Schema({
 BookSchema.virtual("url").get(function(){
     return "/catalog/book/" + this._id;
 });
+
+BookSchema.virtual("dateCreated").get(function(){
+    return moment(this.createdAt).format("MMMM Do, YYYY");
+})
 
 //Export Model
 module.exports = mongoose.model("Book", BookSchema);

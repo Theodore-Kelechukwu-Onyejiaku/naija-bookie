@@ -4,27 +4,37 @@
     <%- include("../partials/books/take_control") %>
 <% } %>
 
-<div class="container mt-5">
-    <div>
-        <h1><%= title %></h1>
-        <ul class="list-group">
-        <% if(book_list.length > 0){ %>
-            <% book_list.sort((a,b)=>{let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;})%>
-            <% book_list.forEach(book =>{ %>
-                
-                    <li class="list-group-item">
-                        <a href="<%= book.url %>"><%= book.title %></a>(<%= book.author.first_name%>, <%= book.author.family_name %>)
-                    </li>
-            <% }) %>
-        </ul>
-        <% } else{ %>
-                <p>There are no books found</p>
-        <% } %>
-    </div>
-</div>
-    
-    
-    
+<div>
+    <h1 class="my-jumbo-box"><%= title %></h1>
+    <div class="row">
+                <% if(book_list.length > 0){ %>
+                    <% book_list.sort((a,b)=>{let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;})%>
+                    <% book_list.forEach(book =>{ %>
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                        <a href="<%= book.url %>">
+                            <div class="media border p-3" style="height: 200px">
+                                <img src="<%= book.picture %>" alt="John Doe" class="mr-3 mt-3" style="width:60px;">
+                                <div class="media-body">
+                                  <h4><%= book.title %> <small><i>Posted on <%= book.dateCreated %></i></small></h4>
+                                  <p><span> By:</span>(<%= book.author.first_name%>, <%= book.author.family_name %>)</p>
+                                </div>
+                            </div>
+                        </a>
+                         
+                            
+                            <!-- <li class="list-group-item">
+                                <a href="<%= book.url %>"><%= book.title %> </a><span> By:</span>(<%= book.author.first_name%>, <%= book.author.family_name %>) <img src="<%= book.picture %>" class="image-fluid" style="max-width:100%;height:auto"
+                                alt="book picture">
+                            </li>
+                            <img src="<%= book.picture %>" class="image-fluid" style="max-width:100%;height:auto"
+                                            alt="book picture"> -->
+                                        </div>
+                    <% }) %>
+                <% } else{ %>
+                        <p>There are no books found</p>
+                <% } %>
+            </div>
+</div>    
 <%- include("../partials/footer") -%>
 
 

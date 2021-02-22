@@ -133,3 +133,18 @@ exports.singnup = async (req, res, next) => {
       res.render("user/profile", {userProfile: results.user, booksCreated: results.booksCreated, title: "User Profile", user: req.user})
     })
   }
+
+  exports.updateUser = async(req, res, next)=>{
+    if(req.file){
+      //
+    }
+    let user = await User.findByIdAndUpdate(req.params.id, {$set: req.body}).exec();
+    console.log(user);
+    if(user == null){
+      var error = new Error("No user found!");
+      return next(error);
+    }else{
+      user.save();
+      res.redirect("/user/"+req.params.id)
+    }
+  }

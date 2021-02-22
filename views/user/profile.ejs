@@ -1,9 +1,45 @@
 <%- include("../partials/header") %>
 
 <% var userProfile; var booksCreated %>
-<p>
+<!-- <p>
     <%= userProfile %>
-</p>
+</p> -->
+<h1 class="my-jumbo-box"><%= title %></h1>
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <img src="/images/theo.jpg" class="image-fluid rounded-circle" style="max-width:100%;height:auto">
+        <ul class="list-group">
+            <li class="list-group-item"><span class="text-success">Username: </span><span class="badge badge-secondary"><%= userProfile.username %></span></li>
+            <li class="list-group-item"><span class="text-success">Full Name: </span><span class="badge badge-secondary"><%= userProfile.firstname %><%= user.lastname %></span></li>
+            <li class="list-group-item"><span class="text-success">Email <span><i class="fa fa-envelope"></i></span>: </span><span class="badge badge-secondary"><%= user.email %></span></li>
+            <li class="list-group-item"><span class="text-success">About <span><i class="fa fa-question"></i></span>: </span><span class="badge badge-secondary"><%= userProfile.about %></span></li>
+            
+        </ul>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <h4 class="my-jumbo-box">Update User Profile</h4>
+        <form action="/user/<%= userProfile._id %>/update" method="POST">
+            <div class="form-group">
+                <label for="firstname"><span class="badge badge-info">First Name</span></label>
+                <input type="text" name="firstname" class="form-control" placeholder="<%= userProfile.firstname %>" id="firstname">
+            </div>
+            <div class="form-group">
+                <label for="lastname"><span class="badge badge-info">Last Name</span></label>
+                <input type="text" name="lastname" class="form-control" placeholder="<%= userProfile.lastname %>" id="lastname">
+            </div>
+            <div class="form-group">
+                <label for="firstname"><span class="badge badge-info">Last Name</span></label>
+                <input type="text"  class="form-control" placeholder="<%= userProfile.lastname %>" id="firstname">
+            </div>
+            <div class="form-group">
+                <label for="about"><span class="badge badge-info">About Me</span></label>
+                <textarea class="form-control" name="about" rows="5" id="about" placeholder="<%=userProfile.about %>"></textarea>
+            </div>
+            <input type="submit" value="Update" class="btn btn-info">
+        </form>
+    </div>    
+</div>
+
 <p>
     <%= booksCreated %>
 </p>

@@ -12,9 +12,10 @@ const UserSchema = new Schema({
     password: {type: String, required: true},
     about: {type: String},
     profilePicture: {type: String},
-    firstName: {type: String},
-    lastName: {type: String},
+    firstname: {type: String},
+    lastname: {type: String},
     messages: MessageSchema,
+    gender: {type: String, enum: ["M", "F", "O"]}
 })
 
 UserSchema.virtual("url").get(()=>{
