@@ -7,6 +7,7 @@ exports.validate = data =>{
         password: Joi.string().min(6).required(),
         firstname: Joi.string().min(3),
         lastname: Joi.string().min(3),
+        gender: Joi.string().min(1)
     })
 
     //return result of operation

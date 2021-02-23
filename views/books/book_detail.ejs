@@ -6,12 +6,14 @@
 
                     <h3>Title: <%= title %>
                     </h3>
-                    <h3> By: <a href="/user/<%= book.whoCreated._id %>" class="text-info">
+                    <p> <strong> By:</strong> <a href="/user/<%= book.whoCreated._id %>" class="text-info">
                             <img src="kskfaksf" alt="" width="80" height="80" alt="profile">
                             <%= book.whoCreated.username %>
-                        </a> <span> </span>
-                        Date Created:
-                    </h3>
+                        </a>
+                    </p>
+                    <p>
+                        Date Created: <%= book.dateCreated %>
+                    </p>
                     <p>
                         <strong>Author</strong>
                         <a href="<%= book.author.url %>" class="text-info">
@@ -27,13 +29,13 @@
                                     <form action="/catalog/book/<%= book._id %>/like" method="POST" style="display: inline;">
                                         <button type="submit" class="btn btn-info" data-toggle="tooltip" title="Like this book"
                                         data-placement="top">
-                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info"><%= book.like.length %></span>
+                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info">like(<%= book.like.length %>)</span>
                                         </button>
                                     </form>
                                     
                                     <a class="btn btn-success" data-toggle="tooltip" title="Comment on this book"
                                         data-placement="top" href="#comment">
-                                        <i class="fa fa-comment"></i><span class="badge badge-success"><%= book.comments.length %></span>
+                                        <i class="fa fa-comment"></i><span class="badge badge-success">comment(<%= book.comments.length %>)</span>
                                     </a>
                                     <button class="btn btn-secondary" data-target="#shareModal" data-toggle="modal"
                                         data-toggle="tooltip" title="Share socially" data-placement="top">
@@ -135,12 +137,12 @@
                                                     <form action="/catalog/book/<%= book._id %>/comment/<%= eachBookComment._id %>/like" method="POST" style="display: inline;">
                                                         <button type="submit" class="btn btn-info" data-toggle="tooltip" title="Like this book"
                                                         data-placement="top">
-                                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info"><%= eachBookComment.like.length %></span>
+                                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info">like(<%= eachBookComment.like.length %>)</span>
                                                         </button>
                                                     </form>
                                                     <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#reply<%= index %>">
                                                         <i class="fa fa-comment"></i><span
-                                                            class="badge badge-success"><%= eachBookComment.replies.length %></span>
+                                                            class="badge badge-success">reply(<%= eachBookComment.replies.length %>)</span>
                                                     </button>
                                                     <% if(eachBookComment.replies.length > 0){ %>
                                                         <div id="reply<%= index %>" class="collapse mt-2 mb-2">  
@@ -210,7 +212,7 @@
                                                         
                                                         <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#demo<%= index %>">
                                                             <i class="fa fa-comment"></i><span
-                                                                class="badge badge-success"><%= eachBookComment.replies.length %></span>
+                                                                class="badge badge-success">reply(<%= eachBookComment.replies.length %>)</span>
                                                         </button>
                                                         <div id="demo<%= index %>" class="collapse">
                                                             <p class="text-danger">!Ooops No replies at the moment <% index %></p>

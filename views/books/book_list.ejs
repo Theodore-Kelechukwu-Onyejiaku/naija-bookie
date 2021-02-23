@@ -12,7 +12,7 @@
                     <% book_list.forEach(book =>{ %>
                         <div class="col-sm-12 col-md-6 col-lg-4">
                         <a href="<%= book.url %>">
-                            <div class="media border p-3" style="height: 200px">
+                            <div class="media my-jumbo border p-3" style="height: 200px">
                                 <img src="<%= book.picture %>" alt="John Doe" class="mr-3 mt-3" style="width:60px;">
                                 <div class="media-body">
                                   <h4><%= book.title %> <small><i>Posted on <%= book.dateCreated %></i></small></h4>
@@ -20,15 +20,7 @@
                                 </div>
                             </div>
                         </a>
-                         
-                            
-                            <!-- <li class="list-group-item">
-                                <a href="<%= book.url %>"><%= book.title %> </a><span> By:</span>(<%= book.author.first_name%>, <%= book.author.family_name %>) <img src="<%= book.picture %>" class="image-fluid" style="max-width:100%;height:auto"
-                                alt="book picture">
-                            </li>
-                            <img src="<%= book.picture %>" class="image-fluid" style="max-width:100%;height:auto"
-                                            alt="book picture"> -->
-                                        </div>
+                </div>
                     <% }) %>
                 <% } else{ %>
                         <p>There are no books found</p>

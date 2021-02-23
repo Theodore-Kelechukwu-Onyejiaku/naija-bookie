@@ -39,6 +39,7 @@ exports.singnup = async (req, res, next) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         password: hashPassword,
+        gender: req.body.gender
       });
   
       await newUser.save();
@@ -138,13 +139,13 @@ exports.singnup = async (req, res, next) => {
     if(req.file){
       //
     }
-    let user = await User.findByIdAndUpdate(req.params.id, {$set: req.body}).exec();
-    console.log(user);
-    if(user == null){
-      var error = new Error("No user found!");
-      return next(error);
-    }else{
-      user.save();
-      res.redirect("/user/"+req.params.id)
-    }
+    User.findByIdAndUpdate({_id: req.params.id}, {$set: req.body}, {new: true}, (err, user)=>{
+      if(err){
+        next(err)
+        return
+      }else{
+        console.log(user)
+        res.redirect("/user/"+req.params.id)
+      }
+    })
   }

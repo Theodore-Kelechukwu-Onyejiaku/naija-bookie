@@ -1,5 +1,24 @@
-<div class="my-jumbo-box">
+<!-- <div class="my-jumbo-box">
     <span class="breadcrumb-item"><a class="" href="/catalog/author/create"> Create new author</a></span>
     <span class="breadcrumb-item"><a class="" href="/catalog/genre/create">Create new genre</a></span>
     <span class="breadcrumb-item"><a class='' href="/catalog/book/create">Create new book</a></span>
+</div> -->
+<div class="d-flex flex-row justify-content-center">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="/catalog/author/create">Create author</a></li>
+        <li class="page-item"><a class="page-link" href="/catalog/genre/create">Create genre</a></li>
+        <li class="page-item"><a class="page-link" href="/catalog/book/create">Create book</a></li>
+    </ul>
 </div>
+
+
+
+<script>
+    let allList = document.querySelectorAll("li");
+    
+    allList.forEach(each =>{
+        each.addEventListener("click", function(){
+            this.style.color = "red";
+        })
+    })
+</script>

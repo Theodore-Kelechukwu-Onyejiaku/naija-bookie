@@ -20,20 +20,20 @@
         <h4 class="my-jumbo-box">Update User Profile</h4>
         <form action="/user/<%= userProfile._id %>/update" method="POST">
             <div class="form-group">
-                <label for="firstname"><span class="badge badge-info">First Name</span></label>
-                <input type="text" name="firstname" class="form-control" placeholder="<%= userProfile.firstname %>" id="firstname">
+                <label for="firstname"><span class="badge badge-info">First Name <button><i class="fa fa-pencil"></i></button></span></label>
+                <input type="text" name="firstname" class="form-control" placeholder="<%= userProfile.firstname %>" id="firstname" value="<%= userProfile.firstname %>" disabled>
             </div>
             <div class="form-group">
-                <label for="lastname"><span class="badge badge-info">Last Name</span></label>
-                <input type="text" name="lastname" class="form-control" placeholder="<%= userProfile.lastname %>" id="lastname">
+                <label for="lastname"><span class="badge badge-info">Last Name<button><i class="fa fa-pencil"></i></button></span></label>
+                <input type="text" name="lastname" class="form-control" value="<%= userProfile.lastname %>" id="lastname" disabled>
             </div>
             <div class="form-group">
-                <label for="firstname"><span class="badge badge-info">Last Name</span></label>
-                <input type="text"  class="form-control" placeholder="<%= userProfile.lastname %>" id="firstname">
+                <label for="email"><span class="badge badge-info">Email<button><i class="fa fa-pencil"></i></button></span></label>
+                <input type="text"  class="form-control" value="<%= userProfile.email %>" id="email" disabled>
             </div>
             <div class="form-group">
-                <label for="about"><span class="badge badge-info">About Me</span></label>
-                <textarea class="form-control" name="about" rows="5" id="about" placeholder="<%=userProfile.about %>"></textarea>
+                <label for="about"><span class="badge badge-info">About Me<button><i class="fa fa-pencil"></i></button></span></label>
+                <textarea class="form-control" name="about" rows="5" id="about" value="<%=userProfile.about %>" disabled><%=userProfile.about %></textarea>
             </div>
             <input type="submit" value="Update" class="btn btn-info">
         </form>
