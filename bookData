@@ -1,7 +1,0 @@
-
-src=book.volumeInfo.imageLinks.thumbnail alt= book.title
-for books by title : https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyAWVbA3W7tsATgtii3Pwazi-2o2nvIqfaw
-
-for single book: https://www.googleapis.com/books/v1/volumes/gK98gXR8onwC
-
-for preview link: "previewLink": "http://books.google.com/books?id=gK98gXR8onwC&hl=&source=gbs_api"
