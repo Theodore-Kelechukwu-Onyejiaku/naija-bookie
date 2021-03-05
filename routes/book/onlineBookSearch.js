@@ -12,7 +12,6 @@ searchRouter.get('/book', function(req, res) {
         .then(function (response) {
             let books = response.data.items;
            res.render("books/onlineBookPreview", {books, title: "Search Result", query: query})
-            
         })
         .catch(function (error) {
             // handle error
