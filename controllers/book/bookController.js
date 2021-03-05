@@ -98,7 +98,7 @@ exports.book_create_get = function(req, res, next) {
         },
     }, function(err, results) {
         if (err) { return next(err); }
-        res.render("books/book_form", { title: 'Create Book', authors: results.authors, genres: results.genres, user: req.user});
+        res.render("books/book_form", { title: 'Create Book', authors: results.authors, genres: results.genres, user: req.user, url: req.url});
     });
     
 };

@@ -149,3 +149,8 @@ exports.singnup = async (req, res, next) => {
       }
     })
   }
+
+
+// exports.getForgotPasswordPage = (req, res, next)=>{
+//   res.render("forgotPassword", {title: "Password Recovery" })
+// }

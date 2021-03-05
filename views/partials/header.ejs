@@ -103,9 +103,10 @@
                   </div>
 
                   <button type="submit" class="btn btn-primary">Submit</button>
-                  <p>You don't have an account? <a href="/user/signup"> &rarr; SignUp</a></p>
-
                 </form>
+                <p class="float-right"><a class="text-primary" href="/user/forgorPassword">Forgot Password?</a></p>
+                <p style="clear:right">You don't have an account? <a class="text-primary" href="/user/signup" > &rarr; SignUp</a></p>
+    
               </div>
 
               <!-- Modal footer -->
@@ -170,7 +171,7 @@
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="/user/<%= user._id %>">Profile</a>
                       <a class="dropdown-item" href="#">Notifications</a>
-                      <a class="dropdown-item" href="#">Messages</a>
+                      <a class="dropdown-item" href="/user/<%= user._id %>/chat">Chats</a>
                       <a href="/user/logout" class="dropdown-item">Logout</a>
                     </div>
                   </div>
@@ -185,5 +186,8 @@
 
 
 
-              <div class="container mt-2 mb-5">
+              <div class=" container mt-2 mb-5">
+
+                
                 <% } %>
+                <%- include("../partials/books/searchBookOnline") %>

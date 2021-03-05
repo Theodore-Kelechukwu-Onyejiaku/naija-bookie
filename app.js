@@ -9,6 +9,7 @@ require('dotenv').config()
 var indexRouter = require('./routes/book/index');
 var userRouter = require('./routes/user');
 var catalogRouter = require("./routes/book/catalog");
+var onlineBookSearch = require("./routes/book/onlineBookSearch")
 
 var app = express();
 var mongoose = require("mongoose");
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use("/catalog", catalogRouter);
+app.use("/search", onlineBookSearch)
 app.use("/user", userRouter);
 app.use("*", indexRouter)
 

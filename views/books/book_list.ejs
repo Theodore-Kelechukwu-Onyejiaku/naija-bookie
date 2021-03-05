@@ -1,8 +1,9 @@
 <%- include("../partials/header") -%>
-<% var user %>
+<% var user ; var book_list ;  %>
 <% if(user){ %>
     <%- include("../partials/books/take_control") %>
 <% } %>
+
 
 <div>
     <h1 class="my-jumbo-box"><%= title %></h1>
@@ -12,21 +13,41 @@
                     <% book_list.forEach(book =>{ %>
                         <div class="col-sm-12 col-md-6 col-lg-4">
                         <a href="<%= book.url %>">
-                            <div class="media my-jumbo border p-3" style="height: 200px">
+                            <div class="media my-jumbo border p-3 bg-dark text-light" style="height: 200px">
                                 <img src="<%= book.picture %>" alt="John Doe" class="mr-3 mt-3" style="width:60px;">
                                 <div class="media-body">
                                   <h4><%= book.title %> <small><i>Posted on <%= book.dateCreated %></i></small></h4>
                                   <p><span> By:</span>(<%= book.author.first_name%>, <%= book.author.family_name %>)</p>
+                                  <p><span>Likes:<%= book.like.length %> </span> <span>Comments</span> <%= book.comments.length %></p>
+                                  
+                                </div>
+                                <div>
                                 </div>
                             </div>
+                            
                         </a>
+                        <!-- <div class="flip-card">
+                            <div class="flip-card-inner">
+                              <div class="flip-card-front">
+                                <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
+                              </div>
+                              <div class="flip-card-back">
+                                <h1>John Doe</h1>
+                                <p>Architect & Engineer</p>
+                                <p>We love that guy</p>
+                              </div>
+                            </div>
+                        </div> -->
                 </div>
                     <% }) %>
                 <% } else{ %>
                         <p>There are no books found</p>
                 <% } %>
             </div>
-</div>    
+
+
+</div>  
+
 <%- include("../partials/footer") -%>
 
 
