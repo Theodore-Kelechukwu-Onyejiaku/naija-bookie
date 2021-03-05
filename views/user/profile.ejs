@@ -1,11 +1,71 @@
 <%- include("../partials/header") %>
 
 <% var userProfile; var booksCreated %>
-<p>
+<!-- <p>
     <%= userProfile %>
-</p>
+</p> -->
+<h1 class="my-jumbo-box"><%= title %></h1>
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <img src="/images/theo.jpg" class="image-fluid rounded-circle" style="max-width:100%;height:auto">
+        <ul class="list-group">
+            <li class="list-group-item"><span class="text-success">Username: </span><span class="badge badge-secondary"><%= userProfile.username %></span></li>
+            <li class="list-group-item"><span class="text-success">Full Name: </span><span class="badge badge-secondary"><%= userProfile.firstname %><%= userProfile.lastname %></span></li>
+            <li class="list-group-item"><span class="text-success">Email <span><i class="fa fa-envelope"></i></span>: </span><span class="badge badge-secondary"><%= userProfile.email %></span></li>
+            <li class="list-group-item"><span class="text-success">About <span><i class="fa fa-question"></i></span>: </span><span class="badge badge-secondary"><%= userProfile.about %></span></li>
+            
+        </ul>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <h4 class="my-jumbo-box">Update User Profile</h4>
+        <form action="/user/<%= userProfile._id %>/update" method="POST">
+            <div class="form-group">
+                <label for="firstname"><span class="badge badge-info">First Name <button><i class="fa fa-pencil"></i></button></span></label>
+                <input type="text" name="firstname" class="form-control" placeholder="<%= userProfile.firstname %>" id="firstname" value="<%= userProfile.firstname %>" disabled>
+            </div>
+            <div class="form-group">
+                <label for="lastname"><span class="badge badge-info">Last Name<button><i class="fa fa-pencil"></i></button></span></label>
+                <input type="text" name="lastname" class="form-control" value="<%= userProfile.lastname %>" id="lastname" disabled>
+            </div>
+            <div class="form-group">
+                <label for="email"><span class="badge badge-info">Email<button><i class="fa fa-pencil"></i></button></span></label>
+                <input type="text"  class="form-control" value="<%= userProfile.email %>" id="email" disabled>
+            </div>
+            <div class="form-group">
+                <label for="about"><span class="badge badge-info">About Me<button><i class="fa fa-pencil"></i></button></span></label>
+                <textarea class="form-control" name="about" rows="5" id="about" value="<%=userProfile.about %>" disabled><%=userProfile.about %></textarea>
+            </div>
+            <input type="submit" value="Update" class="btn btn-info">
+        </form>
+    </div>    
+</div>
+<button class="open-button" class="bg-dark" onclick="openForm()">Chat</button>
+
+<div class="chat-popup" id="myForm">
+  <form action="https://www.w3schools.com/action_page.php" class="form-container">
+    <h1>Chat</h1>
+
+    <label for="msg"><b>Message</b></label>
+    <textarea placeholder="Type message.." name="msg" required></textarea>
+
+    <button type="submit" class="btn">Send</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
 <p>
     <%= booksCreated %>
 </p>
 
 <%- include("../partials/footer") %>
+
+<script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+    
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+</script>
+    

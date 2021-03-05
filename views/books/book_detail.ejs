@@ -1,17 +1,20 @@
 <%- include("../partials/header") %>
     <% var user %>
         <% if(user){ %>
+            
             <%- include("../partials/books/take_control") %>
                 <% } %>
 
                     <h3>Title: <%= title %>
                     </h3>
-                    <h3> By: <a href="/user/<%= book.whoCreated._id %>" class="text-info">
+                    <p> <strong> By:</strong> <a href="/user/<%= book.whoCreated._id %>" class="text-info">
                             <img src="kskfaksf" alt="" width="80" height="80" alt="profile">
                             <%= book.whoCreated.username %>
-                        </a> <span> </span>
-                        Date Created:
-                    </h3>
+                        </a>
+                    </p>
+                    <p>
+                       <strong>Date Created: <%= book.dateCreated %></strong>
+                    </p>
                     <p>
                         <strong>Author</strong>
                         <a href="<%= book.author.url %>" class="text-info">
@@ -27,17 +30,17 @@
                                     <form action="/catalog/book/<%= book._id %>/like" method="POST" style="display: inline;">
                                         <button type="submit" class="btn btn-info" data-toggle="tooltip" title="Like this book"
                                         data-placement="top">
-                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info"><%= book.like.length %></span>
+                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info">like(<%= book.like.length %>)</span>
                                         </button>
                                     </form>
                                     
                                     <a class="btn btn-success" data-toggle="tooltip" title="Comment on this book"
                                         data-placement="top" href="#comment">
-                                        <i class="fa fa-comment"></i><span class="badge badge-success"><%= book.comments.length %></span>
+                                        <i class="fa fa-comment"></i><span class="badge badge-success">comment(<%= book.comments.length %>)</span>
                                     </a>
                                     <button class="btn btn-secondary" data-target="#shareModal" data-toggle="modal"
                                         data-toggle="tooltip" title="Share socially" data-placement="top">
-                                        <i class="fa fa-share"></i>
+                                        <i class="fa fa-share"></i><span>share</span>
                                     </button>
 
                                     <!-- START OF SHARE MODAL -->
@@ -53,18 +56,18 @@
                                                 </div>
 
                                                 <!-- Modal body -->
-                                                <div>
+                                                <div id="share">
                                                     <a class="twitter-share-button" href="https://twitter.com/share?url=url: <%= url %>&text=Book Title: <%= book.title %>&hashtags=naija_bookie" target="blank">
-                                                        <i class="fa fa-twitter fa-2x" style="color: #1da1f2"></i>
+                                                        <i class="fa fa-twitter fa-2x"></i>
                                                     </a>
                                                     <a href="https://linkedin.com/shareArticle?mini=true&amp;url=<%= url %>" class="ml-3" target="blank">
-                                                        <i class="fa fa-linkedin fa-2x" style="color: #0077b5"></i>
+                                                        <i class="fa fa-linkedin fa-2x"></i>
                                                     </a>
                                                     <a href="https://api.whatsapp.com/send?text=<%= url %>" class="ml-3" target="blank">
-                                                        <i class="fa fa-whatsapp fa-2x" style="color: #075e54"></i>
+                                                        <i class="fa fa-whatsapp fa-2x" ></i>
                                                     </a>
                                                     <a href="https://www.facebook.com/sharer/sharer.php?u=<%= url %>" class="ml-3" target="blank">
-                                                        <i class="fa fa-facebook fa-2x" style="color: #3b5998"></i>
+                                                        <i class="fa fa-facebook fa-2x" ></i>
                                                     </a>
                                                 </div>
                                                 
@@ -135,19 +138,17 @@
                                                     <form action="/catalog/book/<%= book._id %>/comment/<%= eachBookComment._id %>/like" method="POST" style="display: inline;">
                                                         <button type="submit" class="btn btn-info" data-toggle="tooltip" title="Like this book"
                                                         data-placement="top">
-                                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info"><%= eachBookComment.like.length %></span>
+                                                            <i class="fa fa-thumbs-up"></i><span class="badge badge-info">like(<%= eachBookComment.like.length %>)</span>
                                                         </button>
                                                     </form>
                                                     <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#reply<%= index %>">
                                                         <i class="fa fa-comment"></i><span
-                                                            class="badge badge-success"><%= eachBookComment.replies.length %></span>
+                                                            class="badge badge-success">reply(<%= eachBookComment.replies.length %>)</span>
                                                     </button>
                                                     <% if(eachBookComment.replies.length > 0){ %>
                                                         <div id="reply<%= index %>" class="collapse mt-2 mb-2">  
                                                         <H4>Replies</H4>                                                      
                                                         <% eachBookComment.replies.forEach( (reply, ind) =>{ %>
-                                                            
-                                                                
                                                                 <div id="accordion">
                                                                     <div class="card">
                                                                       <div class="card-header">
@@ -212,7 +213,7 @@
                                                         
                                                         <button class="btn btn-success" title="Reply this comment" data-placement="top"  data-toggle="collapse" data-target="#demo<%= index %>">
                                                             <i class="fa fa-comment"></i><span
-                                                                class="badge badge-success"><%= eachBookComment.replies.length %></span>
+                                                                class="badge badge-success">reply(<%= eachBookComment.replies.length %>)</span>
                                                         </button>
                                                         <div id="demo<%= index %>" class="collapse">
                                                             <p class="text-danger">!Ooops No replies at the moment <% index %></p>
@@ -262,7 +263,7 @@
                                                                     <div class="form-group">
                                                                         <textarea style="width: 80%"
                                                                             class="form-control float-right"
-                                                                            name="comment" id=""
+                                                                            name="comment" id="comment"
                                                                             placeholder="Enter your comment for this book"></textarea>
                                                                     </div>
                                                                 </div>
@@ -280,8 +281,7 @@
                                                                             <textarea
                                                                                 class="form-control float-right"
                                                                                 name="comment" 
-                                                                                placeholder="Enter your comment for this book">
-                                                                            </textarea>
+                                                                                placeholder="Enter your comment for this book"></textarea>
                                                                         </div>
                                                                         <input type="hidden" name="whoCommented"
                                                                             value="<%= user._id %>">
@@ -301,5 +301,31 @@
 
                     </div>
                 </div>
+                <script>
+                    $(document).ready(function(){
+                      // Add smooth scrolling to all links
+                      $("a").on('click', function(event) {
+                    
+                        // Make sure this.hash has a value before overriding default behavior
+                        if (this.hash !== "") {
+                          // Prevent default anchor click behavior
+                          event.preventDefault();
+                    
+                          // Store hash
+                          var hash = this.hash;
+                    
+                          // Using jQuery's animate() method to add smooth page scroll
+                          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                          $('html, body').animate({
+                            scrollTop: $(hash).offset().top
+                          }, 800, function(){
+                    
+                            // Add hash (#) to URL when done scrolling (default click behavior)
+                            window.location.hash = hash;
+                          });
+                        } // End if
+                      });
+                    });
+                    </script>
 
                     <%- include("../partials/footer") %>

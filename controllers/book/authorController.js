@@ -43,7 +43,7 @@ exports.author_detail = function(req, res, next){
 
 //Display Author create form on GET.
 exports.author_create_get = function(req, res){
-    res.render("books/author_form", { title : "Create Author"})
+    res.render("books/author_form", { title : "Create Author", url : req.url})
 }
 
 //Handle Author create on POST

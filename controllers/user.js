@@ -39,6 +39,7 @@ exports.singnup = async (req, res, next) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         password: hashPassword,
+        gender: req.body.gender
       });
   
       await newUser.save();
@@ -133,3 +134,23 @@ exports.singnup = async (req, res, next) => {
       res.render("user/profile", {userProfile: results.user, booksCreated: results.booksCreated, title: "User Profile", user: req.user})
     })
   }
+
+  exports.updateUser = async(req, res, next)=>{
+    if(req.file){
+      //
+    }
+    User.findByIdAndUpdate({_id: req.params.id}, {$set: req.body}, {new: true}, (err, user)=>{
+      if(err){
+        next(err)
+        return
+      }else{
+        console.log(user)
+        res.redirect("/user/"+req.params.id)
+      }
+    })
+  }
+
+
+// exports.getForgotPasswordPage = (req, res, next)=>{
+//   res.render("forgotPassword", {title: "Password Recovery" })
+// }

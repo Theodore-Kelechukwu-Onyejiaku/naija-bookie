@@ -50,7 +50,7 @@ exports.genre_detail = function (req, res, next) {
 
 // Display Genre create form on GET.
 exports.genre_create_get = function (req, res) {
-  res.render("books/genre_form", { title: "Create Genre" });
+  res.render("books/genre_form", { title: "Create Genre", url: req.url });
 };
 
 // Handle Genre create on POST.

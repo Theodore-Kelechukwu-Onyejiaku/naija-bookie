@@ -40,7 +40,7 @@ exports.index = function(req, res, next) {
 
 // Display list of all books.
 exports.book_list = function(req, res, next) {
-    Book.find({}, "title author")   //Finds all books and return only title and author fields. It will also return _id and virtual fields
+    Book.find()   //Finds all books and return only title and author fields. It will also return _id and virtual fields
     .populate("author") //This will display all the author field details instead of the author id, since it references another document
     .exec((err, list_books)=>{
         
@@ -98,7 +98,7 @@ exports.book_create_get = function(req, res, next) {
         },
     }, function(err, results) {
         if (err) { return next(err); }
-        res.render("books/book_form", { title: 'Create Book', authors: results.authors, genres: results.genres, user: req.user});
+        res.render("books/book_form", { title: 'Create Book', authors: results.authors, genres: results.genres, user: req.user, url: req.url});
     });
     
 };
