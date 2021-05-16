@@ -6,12 +6,14 @@ var axios = require("axios");
 searchRouter.get('/book', function(req, res) {
     console.log(req.query)
     let query = req.query.title;
+    let url = req.protocol + '://' + req.get('host') + "/search/book/";
+    console.log(url)
     console.log(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.GOOGLE_API_KEY}`)
         
         axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${process.env.GOOGLE_API_KEY}&maxResults=20`)
         .then(function (response) {
             let books = response.data.items;
-           res.render("books/onlineBookPreview", {books, title: "Search Result", query: query})
+           res.render("books/onlineBookPreview", {books, title: "Search Result", query: query, url})
         })
         .catch(function (error) {
             // handle error
@@ -20,5 +22,11 @@ searchRouter.get('/book', function(req, res) {
         })
     
 });
+
+
+searchRouter.get("/book/:link", (req, res, next)=>{
+    console.log("Hellow")
+    res.end(req.title, req.link);
+})
 
 module.exports = searchRouter;

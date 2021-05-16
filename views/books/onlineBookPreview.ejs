@@ -1,5 +1,5 @@
 <%- include("../partials/header") -%>
-<% var user ; var book_list ;  %>
+<% var user ; var book_list ; var url %>
 <% if(user){ %>
     <%- include("../partials/books/take_control") %>
 <% } %>
@@ -14,14 +14,25 @@
         <% if(books.length > 0){ %>
             <% books.forEach(book =>{ %>
                 <div class="col-sm-12 col-md-6 col-lg-4 mb-2">
-                    <div class="media border bg-dark p-3 text-light" style="height:100%;position: relative;">
-                        <img src="http://books.google.com/books/content?id=u-R37GQsVfgC&printsec=frontcover&img=1&zoom=5&source=gbs_api" alt="John Doe" class="mr-3 mt-3 img-thumbnail" style="width:80px;">
+                    <div class="media border bg-dark p-3 text-light" style="height:300px;width:350px;position: relative;">
+                        <% if(book.volumeInfo.imageLinks){ %>
+                            <img src="<%= book.volumeInfo.imageLinks['smallThumbnail'] %>" alt="John Doe" class="mr-3 mt-3 img-thumbnail" style="width:80px;">
+
+                        <% }else{ %>
+                            <span>Nothing!</span>
+
+                        <% } %>
                         <div class="media-body">
-                          <p> <span class="badge badge-success">Author(s)</span> <small><i><%= book.volumeInfo.authors %></i></small></p>
+                          <p> <span class="badge badge-success">Author(s)</span> 
+                            <% if(book.volumeInfo.authors){ %>
+                                <small><i><%= book.volumeInfo.authors %></i></small></p>
+                            <% }else{ %>
+                                <small>Not found!</small>
+                            <% } %>
                           <p><span class="badge badge-success">Title</span> <small><%= book.volumeInfo.title %></small></p>
                         </div>
-                        <div style="position: absolute; bottom: 5px; right: 5px;">
-                            <a href="<%= book.selfLink %>" class="btn btn-primary">Preview</a>
+                        <div style="position: absolute; bottom: -0px; right: 5px;">
+                            <a href="<%= url%><%= book.selfLink %>]" class="btn btn-primary">Preview</a>
                         </div>
                     </div>
                 </div>
