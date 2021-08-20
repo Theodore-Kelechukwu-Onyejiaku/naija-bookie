@@ -245,7 +245,7 @@ exports.book_update_post = function(req, res, next) {
 // ADD COMMENTS TO BOOK
 exports.book_post_comment = async(req, res, next) =>{
     try {
-        console.log(req.body);
+        console.log(req.body); 
         var newComment = new Comment({
             comment: req.body.comment,
             whoCommented: req.body.whoCommented,
